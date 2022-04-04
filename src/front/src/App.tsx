@@ -1,13 +1,9 @@
-import { Button } from "antd";
-import React, { Suspense } from "react";
+import React from "react";
 import "./App.css";
+import Login from "./Components/Pages/Login/Login";
 
 const App: React.FC = () => {
-  return (
-    <Button type="primary" size="large">
-      test
-    </Button>
-  );
+  return <Login />;
 };
 
 export default App;
