@@ -1,6 +1,7 @@
 import { Button, Col, Form, Input, Layout, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import Title from "antd/lib/typography/Title";
+import useBreakpoint from "../../../Hooks/useBreakpoint/UseBreakpoint";
 import "./Login.scss";
 import { LoginTypes } from "./LoginTypes";
 
@@ -8,13 +9,15 @@ const Login: React.FC = () => {
   const onFinish = (values: LoginTypes): void => {
     console.log(values);
   };
+
+  const { md } = useBreakpoint();
   return (
     <Layout>
       <Content className="login__wrapper">
         <Row className="login__height-100" align="middle" justify="center">
           <Col className="login__column login__column__form ">
             <div className="login__column__headerContainer">
-              <Title level={1}>Zaloguj się do MoneyHeist</Title>
+              <Title level={md ? 3 : 1}>Zaloguj się do MoneyHeist</Title>
             </div>
             <Form
               name="basic"

@@ -1,3 +1,4 @@
+@import '../../../Utils/Styles/GlobalStyles.scss';
 .login{
     &__height{
         &-100{
@@ -6,7 +7,7 @@
     }
     &__wrapper{
         height: 100vh;
-        background:white;
+        background:$white;
     }
     &__column{
         &__button{
@@ -45,3 +46,17 @@
         width:50%;
     }
 }
+
+@media only screen and (max-width: $medium ){
+    .login{
+        &__column{
+            &__form{
+                width:100%;
+            }
+            &__image{
+                display:none
+            }
+        }
+    }
+}
+
