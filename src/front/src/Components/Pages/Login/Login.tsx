@@ -1,27 +1,27 @@
-import { Button, Checkbox, Col, Form, Input, Layout, Row } from "antd";
+import { Button, Col, Form, Input, Layout, Row } from "antd";
 import { Content } from "antd/lib/layout/layout";
+import Title from "antd/lib/typography/Title";
 import "./Login.scss";
-type Login = {
-  login: string;
-  password: string;
-};
+import { LoginTypes } from "./LoginTypes";
+
 const Login: React.FC = () => {
-  const onFinish = (values: Login): void => {
+  const onFinish = (values: LoginTypes): void => {
     console.log(values);
   };
   return (
     <Layout>
       <Content className="login__wrapper">
-        <Row style={{ height: "100vh" }} align="middle">
-          <Col className="login__column ">
+        <Row className="login__height-100" align="middle" justify="center">
+          <Col className="login__column login__column__form ">
+            <div className="login__column__headerContainer">
+              <Title level={1}>Zaloguj się do MoneyHeist</Title>
+            </div>
             <Form
               name="basic"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}
-              //   onFinishFailed={onFinishFailed}
               autoComplete="off"
+              layout="vertical"
             >
               <Form.Item
                 label="Login"
@@ -38,13 +38,26 @@ const Login: React.FC = () => {
               >
                 <Input.Password />
               </Form.Item>
-              <Form.Item wrapperCol={{ offset: 11 }}>
-                <Button type="primary" htmlType="submit">
+              <div className="login__column__forgetPasswordContainer">
+                <div>
+                  <span className="login__column__forgetPasswordContainer-cursorPointer">
+                    Przypomnij hasło
+                  </span>
+                </div>
+              </div>
+              <Form.Item className="login__column__paddingTop-20">
+                <Button
+                  size="large"
+                  type="primary"
+                  htmlType="submit"
+                  className="login__column__button"
+                >
                   Zaloguj
                 </Button>
               </Form.Item>
             </Form>
           </Col>
+          <Col className="login__column login__column__image "></Col>
         </Row>
       </Content>
     </Layout>
