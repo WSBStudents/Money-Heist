@@ -5,6 +5,8 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import "./Navigation.scss";
+
 const Navigation: React.FC = () => {
   const { Sider } = Layout;
 
@@ -16,7 +18,7 @@ const Navigation: React.FC = () => {
     },
     {
       id: 2,
-      label: "Historia Transakcji",
+      label: "Budżet",
       icon: <VideoCameraOutlined />,
     },
     {
@@ -26,6 +28,11 @@ const Navigation: React.FC = () => {
     },
     {
       id: 4,
+      label: "Historia Transakcji",
+      icon: <UploadOutlined />,
+    },
+    {
+      id: 5,
       label: "Ustawienia",
       icon: <UserOutlined />,
     },
@@ -33,8 +40,12 @@ const Navigation: React.FC = () => {
 
   return (
     <Sider breakpoint="lg" collapsedWidth="0">
-      {/**TODO: Add Logo or name of application or sth  */}
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        className="navigation__marginTop-20"
+      >
         {navbarItems.map((navbarItem) => {
           return (
             <Menu.Item key={navbarItem.id} icon={navbarItem.icon}>

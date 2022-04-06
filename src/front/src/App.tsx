@@ -1,18 +1,14 @@
-import { Layout, Menu } from "antd";
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { Layout } from "antd";
+
 import Navigation from "./Components/Pages/Navigation/Navigation";
 const App: React.FC = () => {
-  const { Content, Sider } = Layout;
+  const { Content } = Layout;
 
   return (
     <Layout style={{ height: "100vh" }}>
       <Navigation />
       <Layout>
-        <Content style={{ margin: "24px 16px 0", background: "red" }}></Content>
+        <Content style={{ margin: "24px 16px", background: "red" }}></Content>
       </Layout>
     </Layout>
   );
