@@ -64,8 +64,10 @@ const TransactionForm: React.FC = () => {
       <Form.Item label="Switch" valuePropName="checked">
         <Switch />
       </Form.Item>
-      <Form.Item label="Button">
-        <Button>Button</Button>
+      <Form.Item>
+        <Button type="primary" htmlType="submit">
+          Button
+        </Button>
       </Form.Item>
     </Form>
   );
