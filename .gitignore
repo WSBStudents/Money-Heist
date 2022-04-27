@@ -10,3 +10,4 @@ target/
 
 ### Database file ###
 *.db
+node_modules

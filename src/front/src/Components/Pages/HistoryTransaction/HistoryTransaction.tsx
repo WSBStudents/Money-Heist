@@ -1,5 +1,15 @@
 import { Table, Tag, Space } from "antd";
-const HistoryTransaction: React.FC = () => {
+import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
+
+type HistoryTransactionProps = {
+  manageHistory?: boolean;
+  disableHeader?: boolean;
+};
+
+const HistoryTransaction: React.FC<HistoryTransactionProps> = ({
+  manageHistory,
+  disableHeader,
+}) => {
   const columns = [
     {
       title: "Tytuł transakcji",
@@ -42,6 +52,9 @@ const HistoryTransaction: React.FC = () => {
     },
   ];
 
+  const filteredColumns = columns.filter(
+    (column) => column.title !== "Zarządzaj"
+  );
   const data = [
     {
       key: "1",
@@ -66,7 +79,16 @@ const HistoryTransaction: React.FC = () => {
     },
   ];
 
-  return <Table columns={columns} dataSource={data} pagination={false} />;
+  return (
+    <>
+      {!disableHeader && <HeaderTitle title="Historia Transakcji" />}
+      <Table
+        columns={manageHistory ? columns : filteredColumns}
+        dataSource={data}
+        pagination={false}
+      />
+    </>
+  );
 };
 
 export default HistoryTransaction;

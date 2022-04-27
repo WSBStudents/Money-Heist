@@ -1,13 +1,13 @@
 import { Layout, Menu } from "antd";
-
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
 import "./Navigation.scss";
 import { NavigationItem } from "../../../Utils/Types/Navigation.types";
 import { Link } from "react-router-dom";
+import {
+  AppstoreOutlined,
+  WalletOutlined,
+  ShoppingCartOutlined,
+  OrderedListOutlined,
+} from "@ant-design/icons";
 
 const Navigation: React.FC = () => {
   const { Sider } = Layout;
@@ -16,32 +16,32 @@ const Navigation: React.FC = () => {
     {
       id: 1,
       label: "Strona główna",
-      icon: <UserOutlined />,
+      icon: <AppstoreOutlined />,
       url: "/",
+    },
+    {
+      id: 6,
+      label: "Dodaj Budżet",
+      icon: <ShoppingCartOutlined />,
+      url: "/add-budget",
     },
     {
       id: 2,
       label: "Budżet",
-      icon: <VideoCameraOutlined />,
+      icon: <WalletOutlined />,
       url: "/budget",
     },
     {
       id: 3,
       label: "Dodaj Transakcję",
-      icon: <UploadOutlined />,
+      icon: <ShoppingCartOutlined />,
       url: "/add-transaction",
     },
     {
       id: 4,
       label: "Historia Transakcji",
-      icon: <UploadOutlined />,
+      icon: <OrderedListOutlined />,
       url: "/transaction-history",
-    },
-    {
-      id: 5,
-      label: "Ustawienia",
-      icon: <UserOutlined />,
-      url: "/settings",
     },
   ];
 

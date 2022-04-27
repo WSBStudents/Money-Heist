@@ -1,6 +1,5 @@
 import {
   Form,
-  Radio,
   Input,
   Select,
   TreeSelect,
@@ -10,13 +9,12 @@ import {
   Switch,
   Button,
 } from "antd";
-import { SizeType } from "antd/lib/config-provider/SizeContext";
 import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 
-const TransactionForm: React.FC = () => {
+const BudgetForm: React.FC = () => {
   return (
     <>
-      <HeaderTitle title="Dodaj Transakcję" />
+      <HeaderTitle title="Dodaj Budżet" />
       <Form
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 14 }}
@@ -77,4 +75,4 @@ const TransactionForm: React.FC = () => {
   );
 };
 
-export default TransactionForm;
+export default BudgetForm;

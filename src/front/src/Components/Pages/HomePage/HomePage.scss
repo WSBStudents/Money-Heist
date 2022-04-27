@@ -1,0 +1,10 @@
+.homePage{
+    &__wrapper{
+        margin: 24px 16px;
+    }
+    &__margin{
+        &-top{
+            margin-top:20px;
+        }
+    }
+}

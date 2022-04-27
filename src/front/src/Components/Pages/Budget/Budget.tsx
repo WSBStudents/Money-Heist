@@ -1,45 +1,55 @@
-import { Col, Row, Space } from "antd";
+import { Button, Card, Col, Row, Space, Table } from "antd";
 import Title from "antd/lib/typography/Title";
+import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 
 const Budget: React.FC = () => {
-  return (
-    <Row
-      gutter={[24, 24]}
-      justify="space-between"
-      style={{
-        padding: "0px 100px",
-        height: "100vh",
-      }}
-    >
-      <Col
-        span={11}
-        style={{
-          border: "1px black solid",
-          borderRadius: "25px",
-          backgroundColor: "#1890FF",
-        }}
-      >
-        <Space
-          style={{
-            margin: "20px",
-          }}
-        >
-          <Title level={3}>Rachunki</Title>
-        </Space>
-      </Col>
-      <Col span={11} style={{ border: "1px black solid" }}>
-        <Space>
-          <Title level={3}>Rachunki</Title>
-        </Space>
-      </Col>
+  const columns = [
+    {
+      title: "Budżet",
+      dataIndex: "budget_title",
+      key: "budget_title",
+    },
+    {
+      title: "Kwota",
+      dataIndex: "amount",
+      key: "amount",
+    },
+    {
+      title: "Opis",
+      dataIndex: "description",
+      key: "description",
+    },
+    {
+      title: "Zarządzaj",
+      key: "action",
+      render: () => {
+        return (
+          <Space size="middle">
+            <a>Usuń</a>
+          </Space>
+        );
+      },
+    },
+  ];
 
-      <Col span={11} style={{ border: "1px black solid" }}>
-        chuj
-      </Col>
-      <Col span={11} style={{ border: "1px black solid" }}>
-        chuj
-      </Col>
-    </Row>
+  const data = [
+    {
+      key: "1",
+      budget_title: "Rachunki",
+      amount: "502 zł",
+      description: "",
+    },
+  ];
+  return (
+    <>
+      <HeaderTitle title="Twoje Budżety" />
+      <Table
+        size="large"
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+      />
+    </>
   );
 };
 
