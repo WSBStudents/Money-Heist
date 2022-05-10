@@ -3,11 +3,12 @@ package wsb.application.moneyheist.config;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.metadata.ClassMap;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import wsb.application.moneyheist.dto.AccountDto;
+import wsb.application.moneyheist.dto.TransactionDto;
 import wsb.application.moneyheist.jpa.model.Account;
+import wsb.application.moneyheist.jpa.model.Transaction;
 
 @Configuration
 public class OrikaConfig {
@@ -16,12 +17,15 @@ public class OrikaConfig {
 
     @Bean
     public MapperFacade mapperFacade() {
-        return mapperFactory.getMapperFacade();
-    }
+        mapperFactory.classMap(TransactionDto.class, Transaction.class)
+                .field("accountDto", "account")
+                .byDefault()
+                .register();
+        mapperFactory.classMap(AccountDto.class, Account.class)
+                .byDefault()
+                .register();
 
-    @Bean
-    public ClassMap<AccountDto, Account> accountDtoAccountClassMap() {
-        return mapperFactory.classMap(AccountDto.class, Account.class).byDefault().toClassMap();
+        return mapperFactory.getMapperFacade();
     }
 
 }
