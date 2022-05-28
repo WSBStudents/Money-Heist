@@ -14,13 +14,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Account {
+public class Budget {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String type;
+    private String title;
     private BigDecimal amount;
+    private String description;
 
 }
