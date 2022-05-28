@@ -1,4 +1,6 @@
 import { Table, Tag, Space } from "antd";
+import { useEffect } from "react";
+import useTransaction from "../../../Hooks/UseTransaction/UseTransaction";
 import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 
 type HistoryTransactionProps = {
@@ -10,6 +12,7 @@ const HistoryTransaction: React.FC<HistoryTransactionProps> = ({
   manageHistory,
   disableHeader,
 }) => {
+  const { isLoading, getTransactions } = useTransaction();
   const columns = [
     {
       title: "Tytuł transakcji",
@@ -78,11 +81,14 @@ const HistoryTransaction: React.FC<HistoryTransactionProps> = ({
       transaction: "Wydatek",
     },
   ];
-
+  useEffect(() => {
+    getTransactions();
+  }, []);
   return (
     <>
       {!disableHeader && <HeaderTitle title="Historia Transakcji" />}
       <Table
+        loading={isLoading}
         columns={manageHistory ? columns : filteredColumns}
         dataSource={data}
         pagination={false}

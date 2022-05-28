@@ -1,8 +1,11 @@
-import { Button, Card, Col, Row, Space, Table } from "antd";
-import Title from "antd/lib/typography/Title";
+import { Space, Table } from "antd";
+
+import { useEffect } from "react";
+import useBudget from "../../../Hooks/UseBudget/UseBudget";
 import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 
 const Budget: React.FC = () => {
+  const { getBudgets, budgets } = useBudget();
   const columns = [
     {
       title: "Budżet",
@@ -40,6 +43,11 @@ const Budget: React.FC = () => {
       description: "",
     },
   ];
+
+  useEffect(() => {
+    getBudgets();
+  }, []);
+
   return (
     <>
       <HeaderTitle title="Twoje Budżety" />
