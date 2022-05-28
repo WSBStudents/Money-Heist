@@ -15,7 +15,6 @@ import wsb.application.moneyheist.jpa.repository.TransactionRepository;
 import wsb.application.moneyheist.service.TransactionService;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,6 +22,7 @@ import java.util.List;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
+    public static final String INCOME_TYPE = "INCOME";
     private TransactionRepository transactionRepository;
     private BudgetRepository budgetRepository;
     private MapperFacade mapper;
@@ -35,16 +35,25 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void addTransaction(final TransactionDto transactionDto) {
-        BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetId()), BudgetDto.class);
-        BigDecimal amount = transactionDto.getAmount();
-        budgetDto.setAmount(budgetDto.getAmount().subtract(amount));
+        final BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetId()), BudgetDto.class);
 
-        Budget budget = mapper.map(budgetDto, Budget.class);
+        final BigDecimal amount = transactionDto.getAmount();
+        budgetDto.setAmount(calculateAmount(budgetDto, amount, transactionDto.getType()));
+
+        final Budget budget = mapper.map(budgetDto, Budget.class);
         budgetRepository.save(budget);
 
-        Transaction transaction = mapper.map(transactionDto, Transaction.class);
+        final Transaction transaction = mapper.map(transactionDto, Transaction.class);
         transaction.setBudget(budget);
         transactionRepository.save(transaction);
+    }
+
+    private BigDecimal calculateAmount(final BudgetDto budgetDto, final BigDecimal amount, final String type) {
+        if (INCOME_TYPE.equals(type)) {
+            return budgetDto.getAmount().add(amount);
+        } else {
+            return budgetDto.getAmount().subtract(amount);
+        }
     }
 
     @Override
