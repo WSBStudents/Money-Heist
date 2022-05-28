@@ -4,7 +4,9 @@ import {
   ArrowUpOutlined,
   ArrowDownOutlined,
 } from "@ant-design/icons";
+import { Currency, Units } from "../../../Utils/Types/UnitEntities";
 const AmountCard: React.FC = () => {
+  // TODO: pass in a props balanceValue and replace all the hardcoded things
   const balanceValue = 10;
   const isBalancePositive = balanceValue > 0;
   return (
@@ -17,7 +19,7 @@ const AmountCard: React.FC = () => {
               value={2137.69}
               precision={2}
               prefix={<WalletOutlined />}
-              suffix="PLN"
+              suffix={Currency.PLN}
             />
           </Card>
         </Col>
@@ -31,7 +33,7 @@ const AmountCard: React.FC = () => {
               prefix={
                 isBalancePositive ? <ArrowUpOutlined /> : <ArrowDownOutlined />
               }
-              suffix="%"
+              suffix={Units.PROCENT}
             />
           </Card>
         </Col>
