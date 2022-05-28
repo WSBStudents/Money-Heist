@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import wsb.application.moneyheist.dto.BudgetDto;
 import wsb.application.moneyheist.service.BudgetService;
@@ -26,8 +27,8 @@ public class BudgetCtrl {
         budgetService.addBudget(budgetDto);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteBudget(@PathVariable final Long id) {
+    @DeleteMapping
+    public void deleteBudget(@RequestParam final Long id) {
         budgetService.deleteBudget(id);
     }
 
