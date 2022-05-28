@@ -3,7 +3,6 @@ package wsb.application.moneyheist.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +41,8 @@ public class BudgetCtrl {
         return budgetService.getAmountAllBudgets();
     }
 
-    @GetMapping("/{id}")
-    public BudgetDto geyBudgetById(@PathVariable final Long id) {
+    @GetMapping()
+    public BudgetDto getBudgetById(@RequestParam final Long id) {
         return budgetService.getBudgetById(id);
     }
 

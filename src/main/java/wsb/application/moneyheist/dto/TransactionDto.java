@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 public class TransactionDto {
 
     private Long id;
-    private String label; // tytuł
+    private String label;
     private BigDecimal amount;
-    private BudgetDto budgetDto;
+    private Long budgetId;
     private String description;
     private String type;
 

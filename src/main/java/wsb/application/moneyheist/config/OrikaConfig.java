@@ -18,7 +18,7 @@ public class OrikaConfig {
     @Bean
     public MapperFacade mapperFacade() {
         mapperFactory.classMap(TransactionDto.class, Transaction.class)
-                .field("budgetDto", "budget")
+                .field("budgetId", "budget.id")
                 .byDefault()
                 .register();
 

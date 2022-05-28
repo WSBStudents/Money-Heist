@@ -35,11 +35,16 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void addTransaction(final TransactionDto transactionDto) {
-        BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetDto().getId()), BudgetDto.class);
+        BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetId()), BudgetDto.class);
         BigDecimal amount = transactionDto.getAmount();
         budgetDto.setAmount(budgetDto.getAmount().subtract(amount));
-        budgetRepository.save(mapper.map(budgetDto, Budget.class));
-        transactionRepository.save(mapper.map(transactionDto, Transaction.class));
+
+        Budget budget = mapper.map(budgetDto, Budget.class);
+        budgetRepository.save(budget);
+
+        Transaction transaction = mapper.map(transactionDto, Transaction.class);
+        transaction.setBudget(budget);
+        transactionRepository.save(transaction);
     }
 
     @Override
