@@ -6,10 +6,11 @@ import { BudgetFormData } from "../../Components/Pages/Budget/BudgetForm/BudgetF
 const useBudget = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [budgets, setBudgets] = useState([]);
+  const [budgetAmount, setBudgetAmount] = useState(0);
   const getBudgets = () => {
     setIsLoading(true);
     axios
-      .get("")
+      .get("/budget/all")
       .then((response) => {
         setBudgets(response.data);
       })
@@ -23,7 +24,7 @@ const useBudget = () => {
   const saveBudget = (values: BudgetFormData) => {
     setIsLoading(true);
     axios
-      .post("", values)
+      .post("/budget", values)
       .then((response) => {
         message.success("Pomyślnie dodano budżet");
       })
@@ -39,7 +40,7 @@ const useBudget = () => {
   const deleteBudget = (id: number) => {
     setIsLoading(true);
     axios
-      .delete("", {
+      .delete("/budget", {
         params: id,
       })
       .then((response) => {
@@ -54,7 +55,29 @@ const useBudget = () => {
       });
   };
 
-  return { isLoading, budgets, saveBudget, deleteBudget, getBudgets };
+  const getBudgetAmount = () => {
+    axios
+      .get("/budget/all/amount")
+      .then((response) => {
+        setBudgetAmount(response.data);
+      })
+      .catch((error) => {
+        throw new Error(
+          "Wystąpił błąd podczas pobierania kwoty budżetów",
+          error
+        );
+      });
+  };
+
+  return {
+    isLoading,
+    budgets,
+    saveBudget,
+    deleteBudget,
+    getBudgets,
+    getBudgetAmount,
+    budgetAmount,
+  };
 };
 
 export default useBudget;

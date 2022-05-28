@@ -9,7 +9,7 @@ export type TransactionFormData = {
   id: number;
   label: string;
   amount: string;
-  budget: BudgetData;
+  budget: Pick<BudgetData, "id">;
   description: string;
   type: TransactionType;
 };
