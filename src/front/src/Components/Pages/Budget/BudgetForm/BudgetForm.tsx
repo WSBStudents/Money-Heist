@@ -1,4 +1,4 @@
-import { Form, Input, Button, message, Spin } from "antd";
+import { Form, Input, Button, Spin } from "antd";
 import TextArea from "antd/lib/input/TextArea";
 import useBudget from "../../../../Hooks/UseBudget/UseBudget";
 
@@ -18,7 +18,11 @@ const BudgetForm: React.FC = () => {
           size={"middle"}
           onFinish={saveBudget}
         >
-          <Form.Item name="label" label="Nazwa budżetu">
+          <Form.Item
+            rules={[{ required: true, message: "Podaj nazwę budżetu!" }]}
+            name="label"
+            label="Nazwa budżetu"
+          >
             <Input disabled={isLoading} type={"text"} />
           </Form.Item>
           <Form.Item name="amount" label="Kwota początkowa (PLN)">

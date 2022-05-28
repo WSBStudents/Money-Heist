@@ -1,7 +1,11 @@
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, DeleteFilled } from "@ant-design/icons";
+import { Tooltip } from "antd";
 import { useNavigate } from "react-router-dom";
 import "./HeaderTitle.scss";
-const HeaderTitle: React.FC<{ title: string }> = ({ title }) => {
+const HeaderTitle: React.FC<{
+  title: string;
+  deleteBudgetId?: () => void;
+}> = ({ title, deleteBudgetId }) => {
   const navigation = useNavigate();
 
   const goToPreviousSite = () => {
@@ -11,10 +15,22 @@ const HeaderTitle: React.FC<{ title: string }> = ({ title }) => {
   return (
     <div className="headerTitle__wrapper">
       <span className="headerTitle__title">{title}</span>
-      <ArrowLeftOutlined
-        onClick={goToPreviousSite}
-        className="headerTitle__arrow"
-      />
+      <div>
+        <Tooltip title="Wróć do poprzedniej strony" placement="left">
+          <ArrowLeftOutlined
+            onClick={goToPreviousSite}
+            className="headerTitle__arrow"
+          />
+        </Tooltip>
+        {deleteBudgetId && (
+          <Tooltip title="Usuń budżet" placement="left">
+            <DeleteFilled
+              className="headerTitle__arrow"
+              onClick={deleteBudgetId}
+            />
+          </Tooltip>
+        )}
+      </div>
     </div>
   );
 };

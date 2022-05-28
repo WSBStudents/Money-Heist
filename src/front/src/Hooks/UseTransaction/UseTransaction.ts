@@ -1,19 +1,19 @@
 import { message } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { BudgetFormData } from "../../Components/Pages/Budget/BudgetForm/BudgetForm.types";
 import { TransactionFormData } from "../../Components/Pages/TransactionForm/TransactionForm.types";
 
-const useTransaction = () => {
+const useTransaction = (numberTransactionsToFetch?: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  const getTransactions = (count?: number) => {
+  const getTransactions = () => {
     setIsLoading(true);
     axios
       .get("/transaction", {
-        params: count,
+        params: { count: numberTransactionsToFetch },
       })
       .then((response) => {
+        console.log(response.data);
         setTransactions(response.data);
       })
       .catch((error) => {
@@ -26,7 +26,10 @@ const useTransaction = () => {
   const saveTransaction = (values: TransactionFormData) => {
     setIsLoading(true);
     axios
-      .post("/transaction", values)
+      .post("/transaction", {
+        ...values,
+        amount: Number(values.amount),
+      })
       .then((response) => {
         message.success("Pomyślnie dodano transkację");
       })
@@ -43,7 +46,7 @@ const useTransaction = () => {
     setIsLoading(true);
     axios
       .delete("/transaction", {
-        params: id,
+        params: { id },
       })
       .then((response) => {
         message.success("Pomyślnie dodano transkację");

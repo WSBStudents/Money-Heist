@@ -1,22 +1,14 @@
-import {
-  Form,
-  Radio,
-  Input,
-  Select,
-  TreeSelect,
-  Cascader,
-  DatePicker,
-  InputNumber,
-  Switch,
-  Button,
-  Spin,
-} from "antd";
+import { Form, Input, Select, Button, Spin } from "antd";
 import TextArea from "antd/lib/input/TextArea";
+import useBudget from "../../../Hooks/UseBudget/UseBudget";
 import useTransaction from "../../../Hooks/UseTransaction/UseTransaction";
 import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
+import { TransactionType } from "./TransactionForm.types";
 
 const TransactionForm: React.FC = () => {
   const { isLoading, saveTransaction } = useTransaction();
+  const { budgets } = useBudget();
+
   return (
     <>
       <HeaderTitle title="Dodaj Transakcję" />
@@ -28,24 +20,54 @@ const TransactionForm: React.FC = () => {
           size={"middle"}
           onFinish={saveTransaction}
         >
-          <Form.Item name="label" label="Nazwa transakcji">
+          <Form.Item
+            name="label"
+            label="Nazwa transakcji"
+            rules={[
+              { required: true, message: "Nazwa transakcji jest wymagana!" },
+            ]}
+          >
             <Input type={"text"} />
           </Form.Item>
-          <Form.Item name="label" label="Kwota transakcji (PLN)">
+          <Form.Item
+            rules={[
+              { required: true, message: "Kwota transakcji jest wymagana!" },
+            ]}
+            name="amount"
+            label="Kwota transakcji (PLN)"
+          >
             <Input type={"number"} />
           </Form.Item>
-          <Form.Item name="budget" label="Wybierz budżet" required>
+          <Form.Item
+            rules={[{ required: true, message: "Proszę wybrać budżet!" }]}
+            name="budget"
+            label="Wybierz budżet"
+          >
             <Select>
-              <Select.Option value="demo">Demo</Select.Option>
+              {budgets.map((budget) => {
+                return (
+                  <Select.Option key={budget.id} value={budget.id}>
+                    {budget.label}
+                  </Select.Option>
+                );
+              })}
             </Select>
           </Form.Item>
           <Form.Item name="description" label="Opis">
             <TextArea />
           </Form.Item>
-          <Form.Item name="budget" label="Wybierz typ transakcji" required>
+          <Form.Item
+            name="type"
+            label="Wybierz typ transakcji"
+            rules={[
+              { required: true, message: "Proszę wybrać typ transakcji!" },
+            ]}
+          >
             <Select>
-              <Select.Option value="demo">Wydatek</Select.Option>
-              <Select.Option value="demo">Zysk</Select.Option>
+              <Select.Option value={TransactionType.EXPENSE}>
+                Wydatek
+              </Select.Option>
+              <Select.Option value={TransactionType.INCOME}>Zysk</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item style={{ marginLeft: "220px" }}>

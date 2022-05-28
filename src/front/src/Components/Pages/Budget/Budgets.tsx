@@ -1,21 +1,29 @@
 import { Space, Table } from "antd";
+import { Link } from "react-router-dom";
 
-import { useEffect } from "react";
 import useBudget from "../../../Hooks/UseBudget/UseBudget";
 import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 
+import { BudgetData } from "./BudgetForm/BudgetForm.types";
+
 const Budget: React.FC = () => {
-  const { getBudgets, budgets } = useBudget();
+  const { isLoading, budgets, deleteBudget } = useBudget();
   const columns = [
     {
       title: "Budżet",
-      dataIndex: "budget_title",
-      key: "budget_title",
+      dataIndex: "label",
+      key: "label",
+      render: (_: any, record: BudgetData) => {
+        return <Link to={`/budget/${record.id}`}>{record.label}</Link>;
+      },
     },
     {
       title: "Kwota",
       dataIndex: "amount",
       key: "amount",
+      render: (_: any, record: BudgetData) => {
+        return <Space>{`${record.amount}zł`}</Space>;
+      },
     },
     {
       title: "Opis",
@@ -25,37 +33,20 @@ const Budget: React.FC = () => {
     {
       title: "Zarządzaj",
       key: "action",
-      render: () => {
-        return (
-          <Space size="middle">
-            <a>Usuń</a>
-          </Space>
-        );
+      render: (_: any, record: BudgetData) => {
+        return <span onClick={() => deleteBudget(record.id)}>Usuń</span>;
       },
     },
   ];
-
-  const data = [
-    {
-      key: "1",
-      budget_title: "Rachunki",
-      amount: "502 zł",
-      description: "",
-    },
-  ];
-
-  useEffect(() => {
-    getBudgets();
-  }, []);
 
   return (
     <>
       <HeaderTitle title="Twoje Budżety" />
       <Table
         size="large"
+        loading={isLoading}
         columns={columns}
-        dataSource={data}
-        pagination={false}
+        dataSource={budgets}
       />
     </>
   );

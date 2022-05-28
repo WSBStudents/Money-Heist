@@ -1,11 +1,14 @@
 import { message } from "antd";
 import axios from "axios";
-import { useState } from "react";
-import { BudgetFormData } from "../../Components/Pages/Budget/BudgetForm/BudgetForm.types";
+import { useEffect, useState } from "react";
+import {
+  BudgetData,
+  BudgetFormData,
+} from "../../Components/Pages/Budget/BudgetForm/BudgetForm.types";
 
 const useBudget = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [budgets, setBudgets] = useState([]);
+  const [budgets, setBudgets] = useState<BudgetData[]>([]);
   const [budgetAmount, setBudgetAmount] = useState(0);
   const getBudgets = () => {
     setIsLoading(true);
@@ -24,8 +27,9 @@ const useBudget = () => {
   const saveBudget = (values: BudgetFormData) => {
     setIsLoading(true);
     axios
-      .post("/budget", values)
+      .post("/budget", { ...values, amount: values.amount ?? 0 })
       .then((response) => {
+        setBudgets([response.data, ...budgets]);
         message.success("Pomyślnie dodano budżet");
       })
       .catch((error) => {
@@ -41,10 +45,15 @@ const useBudget = () => {
     setIsLoading(true);
     axios
       .delete("/budget", {
-        params: id,
+        params: {
+          id,
+        },
       })
-      .then((response) => {
-        message.success("Pomyślnie dodano budżet");
+      .then(() => {
+        setBudgets((prevState) =>
+          prevState.filter((budget) => budget.id !== id)
+        );
+        message.success("Pomyślnie usunięto budżet");
       })
       .catch((error) => {
         message.error("Wystąpił błąd podczas usuwania budżetu");
@@ -69,6 +78,9 @@ const useBudget = () => {
       });
   };
 
+  useEffect(() => {
+    getBudgets();
+  }, []);
   return {
     isLoading,
     budgets,

@@ -8,6 +8,7 @@ import HomePage from "./Components/Pages/HomePage/HomePage";
 import Login from "./Components/Pages/Login/Login";
 import Navigation from "./Components/Pages/Navigation/Navigation";
 import TransactionForm from "./Components/Pages/TransactionForm/TransactionForm";
+import BudgetCard from "./Components/Pages/Budget/BudgetCard/BudgetCard";
 
 const App: React.FC = () => {
   return (
@@ -18,11 +19,12 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route
             path="/transaction-history"
-            element={<HistoryTransaction manageHistory />}
+            element={<HistoryTransaction manageHistory transactionsData={[]} />}
           />
           <Route path="/add-transaction" element={<TransactionForm />} />
           <Route path="/budget" element={<Budget />} />
           <Route path="/add-budget" element={<BudgetForm />} />
+          <Route path="/budget/:id" element={<BudgetCard />} />
         </Routes>
       </Layout>
     </Layout>

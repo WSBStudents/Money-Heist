@@ -5,10 +5,17 @@ import {
   ArrowDownOutlined,
 } from "@ant-design/icons";
 import { Currency, Units } from "../../../Utils/Types/UnitEntities";
+import { useEffect } from "react";
+import useBudget from "../../../Hooks/UseBudget/UseBudget";
 const AmountCard: React.FC = () => {
   // TODO: pass in a props balanceValue and replace all the hardcoded things
-  const balanceValue = 10;
-  const isBalancePositive = balanceValue > 0;
+  const { getBudgetAmount, budgetAmount } = useBudget();
+
+  const isBalancePositive = budgetAmount > 0;
+
+  useEffect(() => {
+    getBudgetAmount();
+  }, []);
   return (
     <div className="site-statistic-demo-card">
       <Row gutter={16}>
@@ -16,7 +23,7 @@ const AmountCard: React.FC = () => {
           <Card>
             <Statistic
               title="Saldo"
-              value={2137.69}
+              value={budgetAmount}
               precision={2}
               prefix={<WalletOutlined />}
               suffix={Currency.PLN}
@@ -27,7 +34,7 @@ const AmountCard: React.FC = () => {
           <Card>
             <Statistic
               title="Balans w skali roku"
-              value={isBalancePositive ? balanceValue : balanceValue * -1}
+              value={isBalancePositive ? budgetAmount : budgetAmount * -1}
               precision={2}
               valueStyle={{ color: isBalancePositive ? "green" : "#cf1322" }}
               prefix={
