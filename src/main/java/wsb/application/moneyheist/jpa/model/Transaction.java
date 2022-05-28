@@ -16,11 +16,11 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String label;
+    private BigDecimal amount;
     @ManyToOne
-    @JoinColumn(name = "account_id", nullable = false)
-    private Account account;
-    private String transactionTitle;
-    private BigDecimal price;
+    @JoinColumn(name = "budget_id", nullable = false)
+    private Budget budget;
     private String description;
     private String type;
 

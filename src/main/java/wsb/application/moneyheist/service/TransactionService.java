@@ -5,9 +5,11 @@ import wsb.application.moneyheist.dto.TransactionDto;
 import java.util.List;
 
 public interface TransactionService {
-    List<TransactionDto> getAllTransaction(Long accountId);
+    List<TransactionDto> getAllTransaction(Long budgetId);
 
-    void updateTransaction(TransactionDto transactionDto);
+    void addTransaction(TransactionDto transactionDto);
 
     void deleteTransaction(Long id);
+
+    List<TransactionDto> getTransaction(Integer count);
 }

@@ -14,18 +14,23 @@ public class TransactionCtrl {
 
     private TransactionService transactionService;
 
-    @GetMapping("/all/{accountId}")
-    public List<TransactionDto> getAllTransactionForAccount(@PathVariable final Long accountId) {
-        return transactionService.getAllTransaction(accountId);
+    @GetMapping("/all/{budgetId}")
+    public List<TransactionDto> getAllTransactionForBudget(@PathVariable final Long budgetId) {
+        return transactionService.getAllTransaction(budgetId);
     }
 
-    @PostMapping("/add")
+    @GetMapping
+    public List<TransactionDto> getTransaction(@RequestParam(required = false) final Integer count) {
+        return transactionService.getTransaction(count);
+    }
+
+    @PostMapping
     public void addTransaction(@RequestBody final TransactionDto transactionDto) {
-        transactionService.updateTransaction(transactionDto);
+        transactionService.addTransaction(transactionDto);
     }
 
     @DeleteMapping("/delete")
-    public void deleteAccount(@RequestParam final Long id) {
+    public void deleteTransaction(@RequestParam final Long id) {
         transactionService.deleteTransaction(id);
     }
 }

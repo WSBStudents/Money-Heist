@@ -9,11 +9,11 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDto {
+public class BudgetDto {
 
     private Long id;
-    private String name;
-    private String type;
+    private String label;
     private BigDecimal amount;
+    private String description;
 
 }
