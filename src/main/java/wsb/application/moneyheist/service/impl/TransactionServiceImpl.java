@@ -5,11 +5,16 @@ import lombok.Data;
 import ma.glasnost.orika.MapperFacade;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import wsb.application.moneyheist.dto.BudgetDto;
 import wsb.application.moneyheist.dto.TransactionDto;
+import wsb.application.moneyheist.jpa.model.Budget;
 import wsb.application.moneyheist.jpa.model.Transaction;
+import wsb.application.moneyheist.jpa.repository.BudgetRepository;
 import wsb.application.moneyheist.jpa.repository.TransactionRepository;
 import wsb.application.moneyheist.service.TransactionService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,7 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
 
     private TransactionRepository transactionRepository;
+    private BudgetRepository budgetRepository;
     private MapperFacade mapper;
 
     @Override
@@ -27,7 +33,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    @Transactional
     public void addTransaction(final TransactionDto transactionDto) {
+        BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetDto().getId()), BudgetDto.class);
+        BigDecimal amount = transactionDto.getAmount();
+        budgetDto.setAmount(budgetDto.getAmount().subtract(amount));
+        budgetRepository.save(mapper.map(budgetDto, Budget.class));
         transactionRepository.save(mapper.map(transactionDto, Transaction.class));
     }
 

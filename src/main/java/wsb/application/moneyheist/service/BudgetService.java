@@ -14,4 +14,6 @@ public interface BudgetService {
     void deleteBudget(Long id);
 
     List<BudgetDto> getAllBudgets();
+
+    BudgetDto getBudgetById(Long id);
 }

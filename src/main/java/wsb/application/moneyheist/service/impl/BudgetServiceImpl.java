@@ -47,4 +47,9 @@ public class BudgetServiceImpl implements BudgetService {
         return mapper.mapAsList(budgetRepository.findAll(), BudgetDto.class);
     }
 
+    @Override
+    public BudgetDto getBudgetById(Long id) {
+        return mapper.map(budgetRepository.getById(id), BudgetDto.class);
+    }
+
 }

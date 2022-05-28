@@ -19,7 +19,7 @@ public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+    private String label;
     private BigDecimal amount;
     private String description;
 

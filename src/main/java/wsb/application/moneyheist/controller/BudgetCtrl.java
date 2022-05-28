@@ -42,4 +42,9 @@ public class BudgetCtrl {
         return budgetService.getAmountAllBudgets();
     }
 
+    @GetMapping("/{id}")
+    public BudgetDto geyBudgetById(@PathVariable final Long id) {
+        return budgetService.getBudgetById(id);
+    }
+
 }
