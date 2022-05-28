@@ -22,7 +22,8 @@ import java.util.List;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
-    public static final String INCOME_TYPE = "INCOME";
+    private static final String INCOME_TYPE = "INCOME";
+
     private TransactionRepository transactionRepository;
     private BudgetRepository budgetRepository;
     private MapperFacade mapper;
