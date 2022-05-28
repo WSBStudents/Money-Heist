@@ -19,7 +19,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route
             path="/transaction-history"
-            element={<HistoryTransaction manageHistory transactionsData={[]} />}
+            element={<HistoryTransaction manageHistory />}
           />
           <Route path="/add-transaction" element={<TransactionForm />} />
           <Route path="/budget" element={<Budget />} />

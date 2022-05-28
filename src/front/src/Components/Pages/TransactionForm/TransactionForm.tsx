@@ -40,7 +40,7 @@ const TransactionForm: React.FC = () => {
           </Form.Item>
           <Form.Item
             rules={[{ required: true, message: "Proszę wybrać budżet!" }]}
-            name="budget"
+            name="budgetId"
             label="Wybierz budżet"
           >
             <Select>

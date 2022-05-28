@@ -9,6 +9,7 @@ import {
 const useBudget = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [budgets, setBudgets] = useState<BudgetData[]>([]);
+  const [budget, setBudget] = useState<BudgetData>({} as BudgetData);
   const [budgetAmount, setBudgetAmount] = useState(0);
   const getBudgets = () => {
     setIsLoading(true);
@@ -19,6 +20,25 @@ const useBudget = () => {
       })
       .catch((error) => {
         throw new Error("Wystąpił błąd podczas pobierania budżetów", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const getBudget = (id: number) => {
+    setIsLoading(true);
+    axios
+      .get("/budget", {
+        params: {
+          id,
+        },
+      })
+      .then((response) => {
+        setBudget(response.data);
+      })
+      .catch((error) => {
+        throw new Error("Wystąpił błąd podczas pobierania budżetu", error);
       })
       .finally(() => {
         setIsLoading(false);
@@ -87,6 +107,8 @@ const useBudget = () => {
     saveBudget,
     deleteBudget,
     getBudgets,
+    getBudget,
+    budget,
     getBudgetAmount,
     budgetAmount,
   };

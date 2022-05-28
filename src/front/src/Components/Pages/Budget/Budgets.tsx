@@ -34,7 +34,14 @@ const Budget: React.FC = () => {
       title: "Zarządzaj",
       key: "action",
       render: (_: any, record: BudgetData) => {
-        return <span onClick={() => deleteBudget(record.id)}>Usuń</span>;
+        return (
+          <span
+            onClick={() => deleteBudget(record.id)}
+            style={{ cursor: "pointer" }}
+          >
+            Usuń
+          </span>
+        );
       },
     },
   ];

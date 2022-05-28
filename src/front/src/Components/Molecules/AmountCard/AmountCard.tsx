@@ -7,15 +7,11 @@ import {
 import { Currency, Units } from "../../../Utils/Types/UnitEntities";
 import { useEffect } from "react";
 import useBudget from "../../../Hooks/UseBudget/UseBudget";
-const AmountCard: React.FC = () => {
+const AmountCard: React.FC<{ budgetAmount: number }> = ({ budgetAmount }) => {
   // TODO: pass in a props balanceValue and replace all the hardcoded things
-  const { getBudgetAmount, budgetAmount } = useBudget();
 
   const isBalancePositive = budgetAmount > 0;
 
-  useEffect(() => {
-    getBudgetAmount();
-  }, []);
   return (
     <div className="site-statistic-demo-card">
       <Row gutter={16}>
@@ -23,7 +19,7 @@ const AmountCard: React.FC = () => {
           <Card>
             <Statistic
               title="Saldo"
-              value={budgetAmount}
+              value={!isNaN(budgetAmount) ? budgetAmount : 0}
               precision={2}
               prefix={<WalletOutlined />}
               suffix={Currency.PLN}

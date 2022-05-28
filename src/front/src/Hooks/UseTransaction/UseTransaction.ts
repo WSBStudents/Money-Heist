@@ -1,11 +1,11 @@
 import { message } from "antd";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TransactionFormData } from "../../Components/Pages/TransactionForm/TransactionForm.types";
 
 const useTransaction = (numberTransactionsToFetch?: number) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState<TransactionFormData[]>([]);
   const getTransactions = () => {
     setIsLoading(true);
     axios
@@ -23,6 +23,22 @@ const useTransaction = (numberTransactionsToFetch?: number) => {
         setIsLoading(false);
       });
   };
+  const getTransactionsForBudget = () => {
+    setIsLoading(true);
+    axios
+      .get("/transaction/all", {
+        params: { id: numberTransactionsToFetch },
+      })
+      .then((response) => {
+        setTransactions(response.data);
+      })
+      .catch((error) => {
+        throw new Error("Wystąpił błąd podczas pobierania transkacji", error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
   const saveTransaction = (values: TransactionFormData) => {
     setIsLoading(true);
     axios
@@ -31,6 +47,7 @@ const useTransaction = (numberTransactionsToFetch?: number) => {
         amount: Number(values.amount),
       })
       .then((response) => {
+        setTransactions([response.data, ...transactions]);
         message.success("Pomyślnie dodano transkację");
       })
       .catch((error) => {
@@ -48,7 +65,10 @@ const useTransaction = (numberTransactionsToFetch?: number) => {
       .delete("/transaction", {
         params: { id },
       })
-      .then((response) => {
+      .then(() => {
+        setTransactions((prevState) =>
+          prevState.filter((transaction) => transaction.id !== id)
+        );
         message.success("Pomyślnie dodano transkację");
       })
       .catch((error) => {
@@ -60,7 +80,12 @@ const useTransaction = (numberTransactionsToFetch?: number) => {
       });
   };
 
+  useEffect(() => {
+    getTransactions();
+  }, []);
+
   return {
+    getTransactionsForBudget,
     isLoading,
     transactions,
     saveTransaction,
