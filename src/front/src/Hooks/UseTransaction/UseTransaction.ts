@@ -7,10 +7,12 @@ import { TransactionFormData } from "../../Components/Pages/TransactionForm/Tran
 const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState([]);
-  const getTransactions = () => {
+  const getTransactions = (count?: number) => {
     setIsLoading(true);
     axios
-      .get("")
+      .get("/transaction", {
+        params: count,
+      })
       .then((response) => {
         setTransactions(response.data);
       })
@@ -24,7 +26,7 @@ const useTransaction = () => {
   const saveTransaction = (values: TransactionFormData) => {
     setIsLoading(true);
     axios
-      .post("", values)
+      .post("/transaction", values)
       .then((response) => {
         message.success("Pomyślnie dodano transkację");
       })
@@ -40,7 +42,7 @@ const useTransaction = () => {
   const deleteTransaction = (id: number) => {
     setIsLoading(true);
     axios
-      .delete("", {
+      .delete("/transaction", {
         params: id,
       })
       .then((response) => {
