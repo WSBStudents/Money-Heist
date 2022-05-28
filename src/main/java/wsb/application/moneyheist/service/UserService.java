@@ -6,4 +6,6 @@ public interface UserService {
 
     UserDto getUserInfo();
 
+    void addUser(UserDto userDto);
+
 }
