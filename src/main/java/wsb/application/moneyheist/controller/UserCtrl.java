@@ -1,7 +1,6 @@
 package wsb.application.moneyheist.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

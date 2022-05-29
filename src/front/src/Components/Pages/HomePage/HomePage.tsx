@@ -14,7 +14,8 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     getTransactions(5);
     getBudgetAmount();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Content className="homePage__wrapper">
       <Spin spinning={isLoading}>
