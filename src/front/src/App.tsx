@@ -16,7 +16,6 @@ const App: React.FC = () => {
       <Navigation />
       <Layout style={{ margin: "24px 16px" }}>
         <Routes>
-          <Route path="/login" element={<Login />}/>
           <Route path="/" element={<HomePage />} />
           <Route
             path="/transaction-history"

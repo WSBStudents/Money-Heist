@@ -1,9 +1,7 @@
 package wsb.application.moneyheist.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wsb.application.moneyheist.dto.UserDto;
@@ -20,11 +18,6 @@ public class UserCtrl {
     @GetMapping
     public UserDto getUserInfo() {
         return userService.getUserInfo();
-    }
-
-    @PostMapping
-    public void addUser() {
-        userService.addUser(null);
     }
 
 }
