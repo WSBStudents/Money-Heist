@@ -2,13 +2,14 @@ import { Layout } from "antd";
 import { Route, Routes } from "react-router-dom";
 import Budget from "./Components/Pages/Budget/Budgets";
 import BudgetForm from "./Components/Pages/Budget/BudgetForm/BudgetForm";
-import HistoryTransaction from "./Components/Pages/HistoryTransaction/HistoryTransaction";
+import HistoryTransaction from "./Components/Organisms/HistoryTransaction/HistoryTransaction";
 
 import HomePage from "./Components/Pages/HomePage/HomePage";
 import Login from "./Components/Pages/Login/Login";
 import Navigation from "./Components/Pages/Navigation/Navigation";
-import TransactionForm from "./Components/Pages/TransactionForm/TransactionForm";
+import TransactionForm from "./Components/Pages/Transaction/TransactionForm/TransactionForm";
 import BudgetCard from "./Components/Pages/Budget/BudgetCard/BudgetCard";
+import Transaction from "./Components/Pages/Transaction/Transaction";
 
 const App: React.FC = () => {
   return (
@@ -16,12 +17,9 @@ const App: React.FC = () => {
       <Navigation />
       <Layout style={{ margin: "24px 16px" }}>
         <Routes>
-          <Route path="/login" element={<Login />}/>
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<HomePage />} />
-          <Route
-            path="/transaction-history"
-            element={<HistoryTransaction manageHistory />}
-          />
+          <Route path="/transaction-history" element={<Transaction />} />
           <Route path="/add-transaction" element={<TransactionForm />} />
           <Route path="/budget" element={<Budget />} />
           <Route path="/add-budget" element={<BudgetForm />} />

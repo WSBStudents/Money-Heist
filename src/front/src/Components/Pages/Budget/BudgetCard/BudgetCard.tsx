@@ -7,21 +7,22 @@ import useBudget from "../../../../Hooks/UseBudget/UseBudget";
 import useTransaction from "../../../../Hooks/UseTransaction/UseTransaction";
 import HeaderTitle from "../../../Atoms/HeaderTitle/HeaderTilte";
 import AmountCard from "../../../Molecules/AmountCard/AmountCard";
-import HistoryTransaction from "../../HistoryTransaction/HistoryTransaction";
+import HistoryTransaction from "../../../Organisms/HistoryTransaction/HistoryTransaction";
 
 const BudgetCard: React.FC = () => {
   const { id } = useParams();
-  const { transactions, getTransactionsForBudget } = useTransaction(Number(id));
+  const budgetID = Number(id);
+  const { transactions, getTransactionsForBudget } = useTransaction();
   const navigate = useNavigate();
   const { deleteBudget, getBudget, budget, isLoading } = useBudget();
   const deleteSingleBudget = () => {
-    deleteBudget(Number(id));
+    deleteBudget(budgetID);
     navigate("/budget");
   };
 
   useEffect(() => {
-    getTransactionsForBudget();
-    getBudget(Number(id));
+    getTransactionsForBudget(budgetID);
+    getBudget(budgetID);
   }, [id]);
   return (
     <Spin spinning={isLoading}>
@@ -37,7 +38,11 @@ const BudgetCard: React.FC = () => {
       <Title level={2} className="homePage__margin-top">
         Historia Transakcji
       </Title>
-      <HistoryTransaction disableHeader />
+      <HistoryTransaction
+        disableHeader
+        transactions={transactions}
+        isLoading={isLoading}
+      />
     </Spin>
   );
 };

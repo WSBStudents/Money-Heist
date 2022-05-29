@@ -1,8 +1,8 @@
 import { Form, Input, Select, Button, Spin } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import useBudget from "../../../Hooks/UseBudget/UseBudget";
-import useTransaction from "../../../Hooks/UseTransaction/UseTransaction";
-import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
+import useBudget from "../../../../Hooks/UseBudget/UseBudget";
+import useTransaction from "../../../../Hooks/UseTransaction/UseTransaction";
+import HeaderTitle from "../../../Atoms/HeaderTitle/HeaderTilte";
 import { TransactionType } from "./TransactionForm.types";
 
 const TransactionForm: React.FC = () => {

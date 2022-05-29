@@ -1,12 +1,12 @@
 import { message } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TransactionFormData } from "../../Components/Pages/TransactionForm/TransactionForm.types";
+import { TransactionFormData } from "../../Components/Pages/Transaction/TransactionForm/TransactionForm.types";
 
-const useTransaction = (numberTransactionsToFetch?: number) => {
+const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState<TransactionFormData[]>([]);
-  const getTransactions = () => {
+  const getTransactions = (numberTransactionsToFetch?: number) => {
     setIsLoading(true);
     axios
       .get("/transaction", {
@@ -23,11 +23,11 @@ const useTransaction = (numberTransactionsToFetch?: number) => {
         setIsLoading(false);
       });
   };
-  const getTransactionsForBudget = () => {
+  const getTransactionsForBudget = (budgetId?: number) => {
     setIsLoading(true);
     axios
       .get("/transaction/all", {
-        params: { id: numberTransactionsToFetch },
+        params: { id: budgetId },
       })
       .then((response) => {
         setTransactions(response.data);
@@ -79,10 +79,6 @@ const useTransaction = (numberTransactionsToFetch?: number) => {
         setIsLoading(false);
       });
   };
-
-  useEffect(() => {
-    getTransactions();
-  }, []);
 
   return {
     getTransactionsForBudget,

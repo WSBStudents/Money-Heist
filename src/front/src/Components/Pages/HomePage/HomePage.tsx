@@ -5,13 +5,14 @@ import useTransaction from "../../../Hooks/UseTransaction/UseTransaction";
 import { Spin } from "antd";
 import useBudget from "../../../Hooks/UseBudget/UseBudget";
 import AmountCard from "../../Molecules/AmountCard/AmountCard";
-import HistoryTransaction from "../HistoryTransaction/HistoryTransaction";
+import HistoryTransaction from "../../Organisms/HistoryTransaction/HistoryTransaction";
 import { useEffect } from "react";
 
 const HomePage: React.FC = () => {
-  const { isLoading, transactions } = useTransaction(5);
+  const { isLoading, transactions, getTransactions } = useTransaction();
   const { budgetAmount, getBudgetAmount } = useBudget();
   useEffect(() => {
+    getTransactions(5);
     getBudgetAmount();
   }, []);
   return (
@@ -27,7 +28,11 @@ const HomePage: React.FC = () => {
         <Title level={2} className="homePage__margin-top">
           Historia Transakcji
         </Title>
-        <HistoryTransaction disableHeader transactionsNumber={5} />
+        <HistoryTransaction
+          disableHeader
+          transactions={transactions}
+          isLoading={isLoading}
+        />
       </Spin>
     </Content>
   );

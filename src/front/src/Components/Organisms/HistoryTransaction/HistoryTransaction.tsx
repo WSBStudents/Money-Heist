@@ -6,21 +6,22 @@ import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 import {
   TransactionFormData,
   TransactionType,
-} from "../TransactionForm/TransactionForm.types";
+} from "../../Pages/Transaction/TransactionForm/TransactionForm.types";
 
 type HistoryTransactionProps = {
   manageHistory?: boolean;
   disableHeader?: boolean;
-  transactionsNumber?: number;
+  transactions: TransactionFormData[];
+  isLoading: boolean;
 };
 
 const HistoryTransaction: React.FC<HistoryTransactionProps> = ({
   manageHistory,
   disableHeader,
-  transactionsNumber,
+  transactions,
+  isLoading,
 }) => {
-  const { isLoading, transactions, deleteTransaction } =
-    useTransaction(transactionsNumber);
+  const { deleteTransaction } = useTransaction();
 
   const columns = [
     {

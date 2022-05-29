@@ -5,11 +5,8 @@ import {
   ArrowDownOutlined,
 } from "@ant-design/icons";
 import { Currency, Units } from "../../../Utils/Types/UnitEntities";
-import { useEffect } from "react";
-import useBudget from "../../../Hooks/UseBudget/UseBudget";
-const AmountCard: React.FC<{ budgetAmount: number }> = ({ budgetAmount }) => {
-  // TODO: pass in a props balanceValue and replace all the hardcoded things
 
+const AmountCard: React.FC<{ budgetAmount: number }> = ({ budgetAmount }) => {
   const isBalancePositive = budgetAmount > 0;
 
   return (
@@ -29,7 +26,7 @@ const AmountCard: React.FC<{ budgetAmount: number }> = ({ budgetAmount }) => {
         <Col span={12}>
           <Card>
             <Statistic
-              title="Balans w skali roku"
+              title="Balans"
               value={isBalancePositive ? budgetAmount : budgetAmount * -1}
               precision={2}
               valueStyle={{ color: isBalancePositive ? "green" : "#cf1322" }}

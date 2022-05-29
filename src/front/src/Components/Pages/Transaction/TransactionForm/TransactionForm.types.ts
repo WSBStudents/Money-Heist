@@ -1,4 +1,4 @@
-import { BudgetData } from "../Budget/BudgetForm/BudgetForm.types";
+import { BudgetData } from "../../Budget/BudgetForm/BudgetForm.types";
 
 export enum TransactionType {
   EXPENSE = "EXPENSE",
