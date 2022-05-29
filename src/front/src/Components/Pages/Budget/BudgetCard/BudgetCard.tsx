@@ -23,7 +23,8 @@ const BudgetCard: React.FC = () => {
   useEffect(() => {
     getTransactionsForBudget(budgetID);
     getBudget(budgetID);
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [budgetID]);
   return (
     <Spin spinning={isLoading}>
       {id && (
