@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'MoneyHeist-BE'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6F1887B18B34BACA7DBAF24CEC85460 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_70465366FBC8467AA449F3651C173198 }}
           package: '*.jar'
