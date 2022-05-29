@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     getTransactions(5);
     getBudgetAmount();
-  }, []);
+  });
   return (
     <Content className="homePage__wrapper">
       <Spin spinning={isLoading}>

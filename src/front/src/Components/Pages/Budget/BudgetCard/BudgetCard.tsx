@@ -11,7 +11,7 @@ import HistoryTransaction from "../../../Organisms/HistoryTransaction/HistoryTra
 
 const BudgetCard: React.FC = () => {
   const { id } = useParams();
-  const budgetID = Number(id);
+  const budgetID = Number(id) ?? 0;
   const { transactions, getTransactionsForBudget } = useTransaction();
   const navigate = useNavigate();
   const { deleteBudget, getBudget, budget, isLoading } = useBudget();
@@ -23,7 +23,7 @@ const BudgetCard: React.FC = () => {
   useEffect(() => {
     getTransactionsForBudget(budgetID);
     getBudget(budgetID);
-  }, [id]);
+  });
   return (
     <Spin spinning={isLoading}>
       {id && (

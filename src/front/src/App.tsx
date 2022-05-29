@@ -2,7 +2,6 @@ import { Layout } from "antd";
 import { Route, Routes } from "react-router-dom";
 import Budget from "./Components/Pages/Budget/Budgets";
 import BudgetForm from "./Components/Pages/Budget/BudgetForm/BudgetForm";
-import HistoryTransaction from "./Components/Organisms/HistoryTransaction/HistoryTransaction";
 
 import HomePage from "./Components/Pages/HomePage/HomePage";
 import Login from "./Components/Pages/Login/Login";
