@@ -5,7 +5,7 @@ import {
   BudgetData,
   BudgetFormData,
 } from "../../Components/Pages/Budget/BudgetForm/BudgetForm.types";
-import { API_URL } from "../../Utils/Types/Api";
+import { API_URL, HEADER } from "../../Utils/Types/Api";
 
 const useBudget = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +53,7 @@ const useBudget = () => {
         { ...values, amount: values.amount ?? 0 },
         {
           headers: {
-            "Access-Control-Allow-Origin": `${API_URL}`,
+            "Access-Control-Allow-Origin": `${HEADER}`,
           },
         }
       )
