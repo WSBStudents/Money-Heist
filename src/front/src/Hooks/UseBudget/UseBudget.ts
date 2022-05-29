@@ -48,7 +48,15 @@ const useBudget = () => {
   const saveBudget = (values: BudgetFormData) => {
     setIsLoading(true);
     axios
-      .post(`${API_URL}/budget`, { ...values, amount: values.amount ?? 0 })
+      .post(
+        `${API_URL}/budget`,
+        { ...values, amount: values.amount ?? 0 },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": `${API_URL}`,
+          },
+        }
+      )
       .then((response) => {
         setBudgets([response.data, ...budgets]);
         message.success("Pomyślnie dodano budżet");
