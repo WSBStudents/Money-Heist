@@ -9,6 +9,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/transaction")
 public class TransactionCtrl {
 
