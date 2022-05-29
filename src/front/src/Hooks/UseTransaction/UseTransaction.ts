@@ -2,6 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { TransactionFormData } from "../../Components/Pages/Transaction/TransactionForm/TransactionForm.types";
+import { API_URL } from "../../Utils/Types/Api";
 
 const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +10,7 @@ const useTransaction = () => {
   const getTransactions = (numberTransactionsToFetch?: number) => {
     setIsLoading(true);
     axios
-      .get("/transaction", {
+      .get(`${API_URL}/transaction`, {
         params: { count: numberTransactionsToFetch },
       })
       .then((response) => {
@@ -26,7 +27,7 @@ const useTransaction = () => {
   const getTransactionsForBudget = (budgetId?: number) => {
     setIsLoading(true);
     axios
-      .get("/transaction/all", {
+      .get(`${API_URL}/transaction/all`, {
         params: { id: budgetId },
       })
       .then((response) => {
@@ -42,7 +43,7 @@ const useTransaction = () => {
   const saveTransaction = (values: TransactionFormData) => {
     setIsLoading(true);
     axios
-      .post("/transaction", {
+      .post(`${API_URL}/transaction`, {
         ...values,
         amount: Number(values.amount),
       })
@@ -62,7 +63,7 @@ const useTransaction = () => {
   const deleteTransaction = (id: number) => {
     setIsLoading(true);
     axios
-      .delete("/transaction", {
+      .delete(`${API_URL}/transaction`, {
         params: { id },
       })
       .then(() => {

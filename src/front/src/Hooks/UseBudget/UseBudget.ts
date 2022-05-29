@@ -5,6 +5,7 @@ import {
   BudgetData,
   BudgetFormData,
 } from "../../Components/Pages/Budget/BudgetForm/BudgetForm.types";
+import { API_URL } from "../../Utils/Types/Api";
 
 const useBudget = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,7 @@ const useBudget = () => {
   const getBudgets = () => {
     setIsLoading(true);
     axios
-      .get("/budget/all")
+      .get(`${API_URL}/budget/all`)
       .then((response) => {
         setBudgets(response.data);
       })
@@ -29,7 +30,7 @@ const useBudget = () => {
   const getBudget = (id: number) => {
     setIsLoading(true);
     axios
-      .get("/budget", {
+      .get(`${API_URL}/budget`, {
         params: {
           id,
         },
@@ -47,7 +48,7 @@ const useBudget = () => {
   const saveBudget = (values: BudgetFormData) => {
     setIsLoading(true);
     axios
-      .post("/budget", { ...values, amount: values.amount ?? 0 })
+      .post(`${API_URL}/budget`, { ...values, amount: values.amount ?? 0 })
       .then((response) => {
         setBudgets([response.data, ...budgets]);
         message.success("Pomyślnie dodano budżet");
@@ -64,7 +65,7 @@ const useBudget = () => {
   const deleteBudget = (id: number) => {
     setIsLoading(true);
     axios
-      .delete("/budget", {
+      .delete(`${API_URL}/budget`, {
         params: {
           id,
         },
@@ -86,7 +87,7 @@ const useBudget = () => {
 
   const getBudgetAmount = () => {
     axios
-      .get("/budget/all/amount")
+      .get(`${API_URL}/budget/all/amount`)
       .then((response) => {
         setBudgetAmount(response.data);
       })
