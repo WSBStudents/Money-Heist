@@ -14,7 +14,6 @@ const useTransaction = () => {
         params: { count: numberTransactionsToFetch },
       })
       .then((response) => {
-        console.log(response.data);
         setTransactions(response.data);
       })
       .catch((error) => {
