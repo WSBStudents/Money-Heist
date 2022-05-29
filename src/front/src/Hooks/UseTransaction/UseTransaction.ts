@@ -2,7 +2,7 @@ import { message } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { TransactionFormData } from "../../Components/Pages/Transaction/TransactionForm/TransactionForm.types";
-import { API_URL } from "../../Utils/Types/Api";
+import { API_URL, HEADER } from "../../Utils/Types/Api";
 
 const useTransaction = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,10 +42,18 @@ const useTransaction = () => {
   const saveTransaction = (values: TransactionFormData) => {
     setIsLoading(true);
     axios
-      .post(`${API_URL}/transaction`, {
-        ...values,
-        amount: Number(values.amount),
-      })
+      .post(
+        `${API_URL}/transaction`,
+        {
+          ...values,
+          amount: Number(values.amount),
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": `${HEADER}`,
+          },
+        }
+      )
       .then((response) => {
         setTransactions([response.data, ...transactions]);
         message.success("Pomyślnie dodano transkację");
