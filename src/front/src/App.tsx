@@ -11,6 +11,7 @@ import BudgetCard from "./Components/Pages/Budget/BudgetCard/BudgetCard";
 import Transaction from "./Components/Pages/Transaction/Transaction";
 
 const App: React.FC = () => {
+  document.title = "Zaliczenie na 5";
   return (
     <Layout style={{ height: "100vh" }}>
       <Navigation />
