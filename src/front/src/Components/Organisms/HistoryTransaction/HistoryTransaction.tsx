@@ -1,6 +1,4 @@
 import { Table, Tag, Space } from "antd";
-import { useEffect, useState } from "react";
-import useBudget from "../../../Hooks/UseBudget/UseBudget";
 import useTransaction from "../../../Hooks/UseTransaction/UseTransaction";
 import HeaderTitle from "../../Atoms/HeaderTitle/HeaderTilte";
 import {

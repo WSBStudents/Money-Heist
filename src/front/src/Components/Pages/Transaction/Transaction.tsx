@@ -6,7 +6,7 @@ const Transaction: React.FC = () => {
   const { getTransactions, transactions, isLoading } = useTransaction();
   useEffect(() => {
     getTransactions();
-  }, []);
+  });
   return (
     <HistoryTransaction
       manageHistory
