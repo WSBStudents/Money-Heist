@@ -1,12 +1,12 @@
-import { Button, Form, Input } from "antd";
+import { Form, Input, Button } from "antd";
 import Title from "antd/lib/typography/Title";
+
 import { useContext } from "react";
 import AuthContext from "../../../Context/AuthContext/AuthContext";
 import useBreakpoint from "../../../Hooks/useBreakpoint/UseBreakpoint";
-import "./Login.scss";
-import { LoginTypes } from "./LoginTypes";
+import { LoginTypes } from "../Login/LoginTypes";
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   const { login, isAuth, handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
     // console.log(values);
@@ -19,7 +19,7 @@ const Login: React.FC = () => {
   return (
     <>
       <div className="login__column__headerContainer">
-        <Title level={md ? 3 : 1}>Zaloguj się do MoneyHeist</Title>
+        <Title level={md ? 3 : 2}>Zarejestruj się do MoneyHeist</Title>
       </div>
       <Form
         name="basic"
@@ -43,13 +43,20 @@ const Login: React.FC = () => {
         >
           <Input.Password />
         </Form.Item>
+        <Form.Item
+          label="Powtórz Hasło"
+          name="password"
+          rules={[{ required: true, message: "Potwórz hasło!" }]}
+        >
+          <Input.Password />
+        </Form.Item>
         <div className="login__column__forgetPasswordContainer">
           <div>
             <span
               onClick={handleUserPage}
               className="login__column__forgetPasswordContainer-cursorPointer"
             >
-              Nie masz konta? Zarejestruj się!
+              Masz konto? Zaloguj się!
             </span>
           </div>
         </div>
@@ -60,7 +67,7 @@ const Login: React.FC = () => {
             htmlType="submit"
             className="login__column__button"
           >
-            Zaloguj
+            Zarejestruj
           </Button>
         </Form.Item>
       </Form>
@@ -68,4 +75,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default Register;

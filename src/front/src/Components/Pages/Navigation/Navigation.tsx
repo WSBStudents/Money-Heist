@@ -8,6 +8,8 @@ import {
   ShoppingCartOutlined,
   OrderedListOutlined,
 } from "@ant-design/icons";
+import { useContext } from "react";
+import AuthContext from "../../../Context/AuthContext/AuthContext";
 
 const Navigation: React.FC = () => {
   const { Sider } = Layout;
@@ -44,6 +46,7 @@ const Navigation: React.FC = () => {
       url: "/transaction-history",
     },
   ];
+  const { logout } = useContext(AuthContext);
 
   return (
     <Sider breakpoint="lg" collapsedWidth="0">
@@ -60,6 +63,9 @@ const Navigation: React.FC = () => {
             </Menu.Item>
           );
         })}
+        <Menu.Item>
+          <span onClick={logout}>Logout</span>
+        </Menu.Item>
       </Menu>
     </Sider>
   );

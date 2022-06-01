@@ -82,6 +82,7 @@ const HistoryTransaction: React.FC<HistoryTransactionProps> = ({
     <>
       {!disableHeader && <HeaderTitle title="Historia Transakcji" />}
       <Table
+        key={"1"}
         loading={isLoading}
         columns={manageHistory ? columns : filteredColumns}
         dataSource={transactions}
