@@ -7,7 +7,7 @@ import "./Login.scss";
 import { LoginTypes } from "./LoginTypes";
 
 const Login: React.FC = () => {
-  const { login, isAuth, handleUserPage } = useContext(AuthContext);
+  const { login, handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
     login();
   };

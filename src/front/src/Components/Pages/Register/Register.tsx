@@ -7,7 +7,7 @@ import useBreakpoint from "../../../Hooks/useBreakpoint/UseBreakpoint";
 import { LoginTypes } from "../Login/LoginTypes";
 
 const Register: React.FC = () => {
-  const { login, isAuth, handleUserPage } = useContext(AuthContext);
+  const { login, handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
     login();
   };
