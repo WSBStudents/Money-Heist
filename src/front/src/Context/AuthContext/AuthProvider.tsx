@@ -4,7 +4,7 @@ import AuthContext from "./AuthContext";
 // import AuthContext from "./AuthContext"
 
 const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
   const [loginPage, setLoginPage] = useState(true);
   const navigate = useNavigate();
 

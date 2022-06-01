@@ -17,6 +17,7 @@ ReactDOM.render(
     <AuthProvider>
       <AuthContext.Consumer>
         {(user) => {
+          console.log(user.isAuth);
           return (
             <Routes>
               <Route path={"/login"} element={<UserManage />} />
