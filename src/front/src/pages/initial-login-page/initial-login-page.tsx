@@ -14,7 +14,7 @@ const InitialLoginPage: React.FC = () => {
           <Col className="login__column login__column__form ">
             {loginPage ? <Login /> : <Register />}
           </Col>
-          <Col className="login__column login__column__image " />
+          {/* <Col className="login__column login__column__image " /> */}
         </Row>
       </Content>
     </Layout>
