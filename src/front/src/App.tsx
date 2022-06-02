@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
 import Navigation from "./pages/sidebar/sidebar";
-import "./app.scss";
+import "./App.scss";
 
 const App: React.FC = () => {
   document.title = "Zaliczenie na 5";
