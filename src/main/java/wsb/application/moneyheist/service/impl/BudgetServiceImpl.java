@@ -6,8 +6,8 @@ import ma.glasnost.orika.MapperFacade;
 import org.springframework.stereotype.Service;
 import wsb.application.moneyheist.dto.BudgetDto;
 import wsb.application.moneyheist.jpa.model.Budget;
-import wsb.application.moneyheist.jpa.repository.BudgetRepository;
 import wsb.application.moneyheist.service.BudgetService;
+import wsb.application.moneyheist.service.ManagerService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,12 +19,12 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class BudgetServiceImpl implements BudgetService {
 
-    private BudgetRepository budgetRepository;
+    private ManagerService managerService;
     private MapperFacade mapper;
 
     @Override
     public BigDecimal getAmountAllBudgets() {
-        final List<BudgetDto> budgets = mapper.mapAsList(budgetRepository.findAll(), BudgetDto.class);
+        final List<BudgetDto> budgets = mapper.mapAsList(managerService.getAllBudgets(), BudgetDto.class);
         return budgets.stream()
                 .map(BudgetDto::getAmount)
                 .collect(toList())
@@ -33,23 +33,23 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public void addBudget(BudgetDto budgetDto) {
-        budgetRepository.save(mapper.map(budgetDto, Budget.class));
+    public void addBudget(final BudgetDto budgetDto) {
+        managerService.addBudget(mapper.map(budgetDto, Budget.class));
     }
 
     @Override
-    public void deleteBudget(Long id) {
-        budgetRepository.deleteById(id);
+    public void deleteBudget(final Long id) {
+        managerService.deleteBudget(id);
     }
 
     @Override
     public List<BudgetDto> getAllBudgets() {
-        return mapper.mapAsList(budgetRepository.findAll(), BudgetDto.class);
+        return mapper.mapAsList(managerService.getAllBudgets(), BudgetDto.class);
     }
 
     @Override
-    public BudgetDto getBudgetById(Long id) {
-        return mapper.map(budgetRepository.getById(id), BudgetDto.class);
+    public BudgetDto getBudgetById(final Long id) {
+        return mapper.map(managerService.getBudgetById(id), BudgetDto.class);
     }
 
 }

@@ -10,8 +10,7 @@ import wsb.application.moneyheist.dto.BudgetDto;
 import wsb.application.moneyheist.dto.TransactionDto;
 import wsb.application.moneyheist.jpa.model.Budget;
 import wsb.application.moneyheist.jpa.model.Transaction;
-import wsb.application.moneyheist.jpa.repository.BudgetRepository;
-import wsb.application.moneyheist.jpa.repository.TransactionRepository;
+import wsb.application.moneyheist.service.ManagerService;
 import wsb.application.moneyheist.service.TransactionService;
 
 import java.math.BigDecimal;
@@ -23,52 +22,52 @@ import java.util.List;
 public class TransactionServiceImpl implements TransactionService {
 
     private static final String INCOME_TYPE = "INCOME";
+    private static final String EXPENSE_TYPE = "EXPENSE";
 
-    private TransactionRepository transactionRepository;
-    private BudgetRepository budgetRepository;
+    private ManagerService managerService;
     private MapperFacade mapper;
 
     @Override
     public List<TransactionDto> getAllTransaction(final Long budgetId) {
-        return mapper.mapAsList(transactionRepository.findAllByBudgetId(budgetId), TransactionDto.class);
+        return mapper.mapAsList(managerService.getAllTransactionForBudgetId(budgetId), TransactionDto.class);
     }
 
     @Override
     @Transactional
     public void addTransaction(final TransactionDto transactionDto) {
-        final BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetId()), BudgetDto.class);
+        final BudgetDto budgetDto = mapper.map(managerService.getBudgetById(transactionDto.getBudgetId()), BudgetDto.class);
 
         final BigDecimal amount = transactionDto.getAmount();
         budgetDto.setAmount(calculateBudget(budgetDto.getAmount(), amount, transactionDto.getType(), false));
 
         final Budget budget = mapper.map(budgetDto, Budget.class);
-        budgetRepository.save(budget);
+        managerService.addBudget(budget);
 
         final Transaction transaction = mapper.map(transactionDto, Transaction.class);
         transaction.setBudget(budget);
-        transactionRepository.save(transaction);
+        managerService.addTransaction(transaction);
     }
 
     @Override
     public void deleteTransaction(final Long id) {
-        final Transaction transaction = transactionRepository.findById(id).get();
-        transactionRepository.deleteById(id);
+        final Transaction transaction = managerService.getTransactionById(id);
+        managerService.deleteTransaction(id);
         refreshBudgetAmount(transaction);
     }
 
     private void refreshBudgetAmount(final Transaction transaction) {
         final Budget budget = transaction.getBudget();
         budget.setAmount(calculateBudget(budget.getAmount(), transaction.getAmount(), transaction.getType(), true));
-        budgetRepository.save(budget);
+        managerService.addBudget(budget);
     }
 
     @Override
     public List<TransactionDto> getTransaction(final Integer count) {
         List<Transaction> transactions;
         if (count != null) {
-            transactions = transactionRepository.findAll(PageRequest.of(0, count)).getContent();
+            transactions = managerService.getAllTransaction(PageRequest.of(0, count));
         } else {
-            transactions = transactionRepository.findAll();
+            transactions = managerService.getAllTransaction(null);
         }
 
         return mapper.mapAsList(transactions, TransactionDto.class);
@@ -79,13 +78,13 @@ public class TransactionServiceImpl implements TransactionService {
                                        final String type,
                                        final boolean reverse) {
         switch (type) {
-            case "EXPENSE":
+            case EXPENSE_TYPE:
                 if (reverse) {
                     return budgetAmount.add(transactionAmount);
                 } else {
                     return budgetAmount.subtract(transactionAmount);
                 }
-            case "INCOME":
+            case INCOME_TYPE:
                 if (reverse) {
                     return budgetAmount.subtract(transactionAmount);
                 } else {
