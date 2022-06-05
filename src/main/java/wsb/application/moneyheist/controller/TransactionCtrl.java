@@ -15,9 +15,9 @@ public class TransactionCtrl {
 
     private TransactionService transactionService;
 
-    @GetMapping("/all/{budgetId}")
-    public List<TransactionDto> getAllTransactionForBudget(@PathVariable final Long budgetId) {
-        return transactionService.getAllTransaction(budgetId);
+    @GetMapping("/all")
+    public List<TransactionDto> getAllTransactionForBudget(@RequestParam final Long id) {
+        return transactionService.getAllTransaction(id);
     }
 
     @GetMapping
@@ -30,7 +30,7 @@ public class TransactionCtrl {
         transactionService.addTransaction(transactionDto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping
     public void deleteTransaction(@RequestParam final Long id) {
         transactionService.deleteTransaction(id);
     }

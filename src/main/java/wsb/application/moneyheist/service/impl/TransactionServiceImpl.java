@@ -39,7 +39,7 @@ public class TransactionServiceImpl implements TransactionService {
         final BudgetDto budgetDto = mapper.map(budgetRepository.getById(transactionDto.getBudgetId()), BudgetDto.class);
 
         final BigDecimal amount = transactionDto.getAmount();
-        budgetDto.setAmount(calculateAmount(budgetDto, amount, transactionDto.getType()));
+        budgetDto.setAmount(calculateBudget(budgetDto.getAmount(), amount, transactionDto.getType(), false));
 
         final Budget budget = mapper.map(budgetDto, Budget.class);
         budgetRepository.save(budget);
@@ -49,21 +49,21 @@ public class TransactionServiceImpl implements TransactionService {
         transactionRepository.save(transaction);
     }
 
-    private BigDecimal calculateAmount(final BudgetDto budgetDto, final BigDecimal amount, final String type) {
-        if (INCOME_TYPE.equals(type)) {
-            return budgetDto.getAmount().add(amount);
-        } else {
-            return budgetDto.getAmount().subtract(amount);
-        }
-    }
-
     @Override
     public void deleteTransaction(final Long id) {
+        final Transaction transaction = transactionRepository.findById(id).get();
         transactionRepository.deleteById(id);
+        refreshBudgetAmount(transaction);
+    }
+
+    private void refreshBudgetAmount(final Transaction transaction) {
+        final Budget budget = transaction.getBudget();
+        budget.setAmount(calculateBudget(budget.getAmount(), transaction.getAmount(), transaction.getType(), true));
+        budgetRepository.save(budget);
     }
 
     @Override
-    public List<TransactionDto> getTransaction(Integer count) {
+    public List<TransactionDto> getTransaction(final Integer count) {
         List<Transaction> transactions;
         if (count != null) {
             transactions = transactionRepository.findAll(PageRequest.of(0, count)).getContent();
@@ -72,6 +72,27 @@ public class TransactionServiceImpl implements TransactionService {
         }
 
         return mapper.mapAsList(transactions, TransactionDto.class);
+    }
+
+    private BigDecimal calculateBudget(final BigDecimal budgetAmount,
+                                       final BigDecimal transactionAmount,
+                                       final String type,
+                                       final boolean reverse) {
+        switch (type) {
+            case "EXPENSE":
+                if (reverse) {
+                    return budgetAmount.add(transactionAmount);
+                } else {
+                    return budgetAmount.subtract(transactionAmount);
+                }
+            case "INCOME":
+                if (reverse) {
+                    return budgetAmount.subtract(transactionAmount);
+                } else {
+                    return budgetAmount.add(transactionAmount);
+                }
+        }
+        return budgetAmount;
     }
 
 }
