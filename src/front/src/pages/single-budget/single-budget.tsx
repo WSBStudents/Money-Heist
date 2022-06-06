@@ -1,20 +1,22 @@
 import { Spin } from "antd";
 import Title from "antd/lib/typography/Title";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useBudget from "../../hooks/use-budget/use-budget";
 
-import useTransaction from "../../hooks/use-transaction/use-transaction";
 import HeaderTitle from "../../components/header-title/header-tilte";
 import AmountCard from "../../components/amount-card/amount-card";
 import HistoryTransaction from "../../components/history-transaction/history-transaction";
+import TransactionContext from "../../context/transaction-context/transaction-context";
+import BudgetContext from "../../context/budget-context/budget-context";
 
 const BudgetCard: React.FC = () => {
   const { id } = useParams();
   const budgetID = Number(id) ?? 0;
-  const { transactions, getTransactionsForBudget } = useTransaction();
+  const { transactions, getTransactionsForBudget } =
+    useContext(TransactionContext);
   const navigate = useNavigate();
-  const { deleteBudget, getBudget, budget, isLoading } = useBudget();
+  const { deleteBudget, getBudget, budget, isLoading } =
+    useContext(BudgetContext);
   const deleteSingleBudget = () => {
     deleteBudget(budgetID);
     navigate("/budget");

@@ -1,11 +1,12 @@
 import { Form, Input, Button, Spin } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import useBudget from "../../../hooks/use-budget/use-budget";
+import { useContext } from "react";
+import BudgetContext from "../../../context/budget-context/budget-context";
 
 import HeaderTitle from "../../header-title/header-tilte";
 
 const BudgetForm: React.FC = () => {
-  const { saveBudget, isLoading } = useBudget();
+  const { saveBudget, isLoading } = useContext(BudgetContext);
 
   return (
     <>

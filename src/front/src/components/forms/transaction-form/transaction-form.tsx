@@ -1,19 +1,21 @@
-import { Form, Input, Select, Button, Spin } from "antd";
+import { Form, Input, Select, Button, Spin, Radio } from "antd";
 import TextArea from "antd/lib/input/TextArea";
-import useBudget from "../../../hooks/use-budget/use-budget";
-import useTransaction from "../../../hooks/use-transaction/use-transaction";
+import { useContext } from "react";
+import BudgetContext from "../../../context/budget-context/budget-context";
+import TransactionContext from "../../../context/transaction-context/transaction-context";
 import HeaderTitle from "../../header-title/header-tilte";
 import { TransactionType } from "./transaction-form-types";
 
 const TransactionForm: React.FC = () => {
-  const { isLoading, saveTransaction } = useTransaction();
-  const { budgets } = useBudget();
+  const { isLoading, saveTransaction, form } = useContext(TransactionContext);
+  const budget = useContext(BudgetContext);
 
   return (
     <>
       <HeaderTitle title="Dodaj Transakcję" />
-      <Spin spinning={isLoading}>
+      <Spin spinning={isLoading && budget.isLoading}>
         <Form
+          form={form}
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
           layout="horizontal"
@@ -43,8 +45,11 @@ const TransactionForm: React.FC = () => {
             name="budgetId"
             label="Wybierz budżet"
           >
-            <Select>
-              {budgets.map((budget) => {
+            <Select
+              placeholder="Proszę wybrać budżet z listy"
+              disabled={budget.budgets.length < 0}
+            >
+              {budget.budgets.map((budget) => {
                 return (
                   <Select.Option key={budget.id} value={budget.id}>
                     {budget.label}
@@ -63,12 +68,12 @@ const TransactionForm: React.FC = () => {
               { required: true, message: "Proszę wybrać typ transakcji!" },
             ]}
           >
-            <Select>
-              <Select.Option value={TransactionType.EXPENSE}>
+            <Radio.Group>
+              <Radio.Button value={TransactionType.EXPENSE}>
                 Wydatek
-              </Select.Option>
-              <Select.Option value={TransactionType.INCOME}>Zysk</Select.Option>
-            </Select>
+              </Radio.Button>
+              <Radio.Button value={TransactionType.INCOME}>Zysk</Radio.Button>
+            </Radio.Group>
           </Form.Item>
           <Form.Item style={{ marginLeft: "220px" }}>
             <Button disabled={false} type="primary" htmlType="submit">

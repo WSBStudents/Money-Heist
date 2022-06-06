@@ -1,13 +1,13 @@
 import { Space, Table } from "antd";
 import { Link } from "react-router-dom";
 
-import useBudget from "../../hooks/use-budget/use-budget";
 import HeaderTitle from "../../components/header-title/header-tilte";
 import { BudgetData } from "../../components/forms/budget-form/budget-form-types";
-import React from "react";
+import React, { useContext } from "react";
+import BudgetContext from "../../context/budget-context/budget-context";
 
 const Budget: React.FC = React.memo(() => {
-  const { isLoading, budgets, deleteBudget } = useBudget();
+  const { isLoading, budgets, deleteBudget } = useContext(BudgetContext);
   const columns = [
     {
       title: "Budżet",

@@ -6,8 +6,9 @@ import {
   BudgetFormData,
 } from "../../components/forms/budget-form/budget-form-types";
 import { API_URL, HEADER } from "../../utils/types/api-types";
+import BudgetContext from "./budget-context";
 
-const useBudget = () => {
+const BudgetProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [budgets, setBudgets] = useState<BudgetData[]>([]);
   const [budget, setBudget] = useState<BudgetData>({} as BudgetData);
@@ -110,17 +111,23 @@ const useBudget = () => {
   useEffect(() => {
     getBudgets();
   }, []);
-  return {
-    isLoading,
-    budgets,
-    saveBudget,
-    deleteBudget,
-    getBudgets,
-    getBudget,
-    budget,
-    getBudgetAmount,
-    budgetAmount,
-  };
+  return (
+    <BudgetContext.Provider
+      value={{
+        isLoading,
+        budgets,
+        saveBudget,
+        deleteBudget,
+        getBudgets,
+        getBudget,
+        budget,
+        getBudgetAmount,
+        budgetAmount,
+      }}
+    >
+      {children}
+    </BudgetContext.Provider>
+  );
 };
 
-export default useBudget;
+export default BudgetProvider;

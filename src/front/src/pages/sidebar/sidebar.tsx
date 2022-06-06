@@ -56,9 +56,9 @@ const Sidebar: React.FC = () => {
         defaultSelectedKeys={["1"]}
         className="navigation__marginTop-20"
       >
-        {navbarItems.map((navbarItem) => {
+        {navbarItems.map((navbarItem, index) => {
           return (
-            <Menu.Item key={navbarItem.id} icon={navbarItem.icon}>
+            <Menu.Item key={navbarItem.id ?? index} icon={navbarItem.icon}>
               <Link to={navbarItem.url}>{navbarItem.label}</Link>
             </Menu.Item>
           );

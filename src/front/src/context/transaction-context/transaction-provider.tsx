@@ -1,12 +1,14 @@
-import { message } from "antd";
+import { Form, message } from "antd";
 import axios from "axios";
 import { useState } from "react";
 import { TransactionFormData } from "../../components/forms/transaction-form/transaction-form-types";
 import { API_URL, HEADER } from "../../utils/types/api-types";
+import TransactionContext from "./transaction-context";
 
-const useTransaction = () => {
+const TransactionProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [transactions, setTransactions] = useState<TransactionFormData[]>([]);
+  const [form] = Form.useForm();
   const getTransactions = (numberTransactionsToFetch?: number) => {
     setIsLoading(true);
     axios
@@ -39,6 +41,7 @@ const useTransaction = () => {
         setIsLoading(false);
       });
   };
+
   const saveTransaction = (values: TransactionFormData) => {
     setIsLoading(true);
     axios
@@ -57,6 +60,7 @@ const useTransaction = () => {
       .then((response) => {
         setTransactions([response.data, ...transactions]);
         message.success("Pomyślnie dodano transkację");
+        form.resetFields();
       })
       .catch((error) => {
         message.error("Wystąpił błąd podczas dodawania transkacji");
@@ -66,7 +70,6 @@ const useTransaction = () => {
         setIsLoading(false);
       });
   };
-
   const deleteTransaction = (id: number) => {
     setIsLoading(true);
     axios
@@ -77,7 +80,7 @@ const useTransaction = () => {
         setTransactions((prevState) =>
           prevState.filter((transaction) => transaction.id !== id)
         );
-        message.success("Pomyślnie dodano transkację");
+        message.success("Pomyślnie usunięto transkację");
       })
       .catch((error) => {
         message.error("Wystąpił błąd podczas usuwania transkacji");
@@ -87,15 +90,21 @@ const useTransaction = () => {
         setIsLoading(false);
       });
   };
-
-  return {
-    getTransactionsForBudget,
-    isLoading,
-    transactions,
-    saveTransaction,
-    deleteTransaction,
-    getTransactions,
-  };
+  return (
+    <TransactionContext.Provider
+      value={{
+        getTransactionsForBudget,
+        deleteTransaction,
+        getTransactions,
+        transactions,
+        isLoading,
+        saveTransaction,
+        form,
+      }}
+    >
+      {children}
+    </TransactionContext.Provider>
+  );
 };
 
-export default useTransaction;
+export default TransactionProvider;

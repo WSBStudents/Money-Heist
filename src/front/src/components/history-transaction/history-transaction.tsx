@@ -1,11 +1,11 @@
 import { Table, Tag, Space } from "antd";
-import useTransaction from "../../hooks/use-transaction/use-transaction";
 import HeaderTitle from "../header-title/header-tilte";
 import {
   TransactionFormData,
   TransactionType,
 } from "../forms/transaction-form/transaction-form-types";
-import React from "react";
+import React, { useContext } from "react";
+import TransactionContext from "../../context/transaction-context/transaction-context";
 
 type HistoryTransactionProps = {
   manageHistory?: boolean;
@@ -16,7 +16,7 @@ type HistoryTransactionProps = {
 
 const HistoryTransaction: React.FC<HistoryTransactionProps> = React.memo(
   ({ manageHistory, disableHeader, transactions, isLoading }) => {
-    const { deleteTransaction } = useTransaction();
+    const { deleteTransaction } = useContext(TransactionContext);
 
     const columns = [
       {
