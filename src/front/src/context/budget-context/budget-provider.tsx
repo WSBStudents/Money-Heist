@@ -1,6 +1,6 @@
 import { message } from "antd";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   BudgetData,
   BudgetFormData,
@@ -108,9 +108,6 @@ const BudgetProvider: React.FC = ({ children }) => {
       });
   };
 
-  useEffect(() => {
-    getBudgets();
-  }, []);
   return (
     <BudgetContext.Provider
       value={{

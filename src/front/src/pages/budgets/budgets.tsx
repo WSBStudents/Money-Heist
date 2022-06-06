@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 import HeaderTitle from "../../components/header-title/header-tilte";
 import { BudgetData } from "../../components/forms/budget-form/budget-form-types";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import BudgetContext from "../../context/budget-context/budget-context";
 
 const Budget: React.FC = React.memo(() => {
-  const { isLoading, budgets, deleteBudget } = useContext(BudgetContext);
+  const { isLoading, budgets, deleteBudget, getBudgets } =
+    useContext(BudgetContext);
   const columns = [
     {
       title: "Budżet",
@@ -45,7 +46,10 @@ const Budget: React.FC = React.memo(() => {
       },
     },
   ];
-
+  useEffect(() => {
+    getBudgets();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <HeaderTitle title="Twoje Budżety" />
