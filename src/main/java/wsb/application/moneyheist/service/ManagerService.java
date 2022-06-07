@@ -1,27 +1,28 @@
 package wsb.application.moneyheist.service;
 
 import org.springframework.data.domain.PageRequest;
+import wsb.application.moneyheist.jpa.model.Agreement;
 import wsb.application.moneyheist.jpa.model.Budget;
-import wsb.application.moneyheist.jpa.model.Transaction;
 
 import java.util.List;
 
 public interface ManagerService {
 
-    void addBudget(final Budget budget);
+    void addBudget(Budget budget);
+
     void deleteBudget(Long id);
 
     List<Budget> getAllBudgets();
 
     Budget getBudgetById(Long id);
 
-    void addTransaction(Transaction transaction);
+    void addAgreement(Agreement agreement);
 
     void deleteTransaction(Long id);
 
-    List<Transaction> getAllTransactionForBudgetId(Long budgetId);
+    List<Agreement> getAllTransactionForBudgetId(Long budgetId);
 
-    Transaction getTransactionById(Long id);
+    Agreement getTransactionById(Long id);
 
-    List<Transaction> getAllTransaction(PageRequest pageRequest);
+    List<Agreement> getAllTransaction(PageRequest pageRequest);
 }

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Transaction {
+public class Agreement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

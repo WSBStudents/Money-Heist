@@ -4,15 +4,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import wsb.application.moneyheist.jpa.model.Transaction;
+import wsb.application.moneyheist.jpa.model.Agreement;
 
 import java.util.List;
 
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+public interface AgreementRepository extends JpaRepository<Agreement, Long> {
 
-    List<Transaction> findAllByBudgetId(Long budgetId);
+    List<Agreement> findAllByBudgetId(Long budgetId);
 
-    Page<Transaction> findAll(Pageable pageable);
+    Page<Agreement> findAll(Pageable pageable);
+
+    void deleteByBudget_Id(Long budgetId);
 
 }

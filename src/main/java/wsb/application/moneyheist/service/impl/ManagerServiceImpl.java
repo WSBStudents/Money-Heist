@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import wsb.application.moneyheist.jpa.model.Agreement;
 import wsb.application.moneyheist.jpa.model.Budget;
-import wsb.application.moneyheist.jpa.model.Transaction;
 import wsb.application.moneyheist.jpa.repository.BudgetRepository;
-import wsb.application.moneyheist.jpa.repository.TransactionRepository;
+import wsb.application.moneyheist.jpa.repository.AgreementRepository;
 import wsb.application.moneyheist.service.ManagerService;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 @Service
 public class ManagerServiceImpl implements ManagerService {
 
-    private TransactionRepository transactionRepository;
+    private AgreementRepository agreementRepository;
     private BudgetRepository budgetRepository;
 
     @Override
@@ -26,7 +27,9 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
+    @Transactional
     public void deleteBudget(final Long id) {
+        agreementRepository.deleteByBudget_Id(id);
         budgetRepository.deleteById(id);
     }
 
@@ -41,31 +44,31 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public void addTransaction(Transaction transaction) {
-        transactionRepository.save(transaction);
+    public void addAgreement(final Agreement agreement) {
+        agreementRepository.save(agreement);
     }
 
     @Override
     public void deleteTransaction(final Long id) {
-        transactionRepository.deleteById(id);
+        agreementRepository.deleteById(id);
     }
 
     @Override
-    public List<Transaction> getAllTransactionForBudgetId(Long budgetId) {
-        return transactionRepository.findAllByBudgetId(budgetId);
+    public List<Agreement> getAllTransactionForBudgetId(final Long budgetId) {
+        return agreementRepository.findAllByBudgetId(budgetId);
     }
 
     @Override
-    public Transaction getTransactionById(final Long id) {
-        return transactionRepository.findById(id).get();
+    public Agreement getTransactionById(final Long id) {
+        return agreementRepository.findById(id).get();
     }
 
     @Override
-    public List<Transaction> getAllTransaction(final PageRequest pageRequest) {
+    public List<Agreement> getAllTransaction(final PageRequest pageRequest) {
         if (pageRequest != null) {
-            return transactionRepository.findAll(pageRequest).getContent();
+            return agreementRepository.findAll(pageRequest).getContent();
         }
-        return transactionRepository.findAll();
+        return agreementRepository.findAll();
     }
 
 }

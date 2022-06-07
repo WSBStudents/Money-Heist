@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wsb.application.moneyheist.dto.BudgetDto;
 import wsb.application.moneyheist.dto.TransactionDto;
+import wsb.application.moneyheist.jpa.model.Agreement;
 import wsb.application.moneyheist.jpa.model.Budget;
-import wsb.application.moneyheist.jpa.model.Transaction;
 import wsb.application.moneyheist.service.ManagerService;
 import wsb.application.moneyheist.service.TransactionService;
 
@@ -43,34 +43,34 @@ public class TransactionServiceImpl implements TransactionService {
         final Budget budget = mapper.map(budgetDto, Budget.class);
         managerService.addBudget(budget);
 
-        final Transaction transaction = mapper.map(transactionDto, Transaction.class);
-        transaction.setBudget(budget);
-        managerService.addTransaction(transaction);
+        final Agreement agreement = mapper.map(transactionDto, Agreement.class);
+        agreement.setBudget(budget);
+        managerService.addAgreement(agreement);
     }
 
     @Override
     public void deleteTransaction(final Long id) {
-        final Transaction transaction = managerService.getTransactionById(id);
+        final Agreement agreement = managerService.getTransactionById(id);
         managerService.deleteTransaction(id);
-        refreshBudgetAmount(transaction);
+        refreshBudgetAmount(agreement);
     }
 
-    private void refreshBudgetAmount(final Transaction transaction) {
-        final Budget budget = transaction.getBudget();
-        budget.setAmount(calculateBudget(budget.getAmount(), transaction.getAmount(), transaction.getType(), true));
+    private void refreshBudgetAmount(final Agreement agreement) {
+        final Budget budget = agreement.getBudget();
+        budget.setAmount(calculateBudget(budget.getAmount(), agreement.getAmount(), agreement.getType(), true));
         managerService.addBudget(budget);
     }
 
     @Override
     public List<TransactionDto> getTransaction(final Integer count) {
-        List<Transaction> transactions;
+        List<Agreement> agreements;
         if (count != null) {
-            transactions = managerService.getAllTransaction(PageRequest.of(0, count));
+            agreements = managerService.getAllTransaction(PageRequest.of(0, count));
         } else {
-            transactions = managerService.getAllTransaction(null);
+            agreements = managerService.getAllTransaction(null);
         }
 
-        return mapper.mapAsList(transactions, TransactionDto.class);
+        return mapper.mapAsList(agreements, TransactionDto.class);
     }
 
     private BigDecimal calculateBudget(final BigDecimal budgetAmount,
