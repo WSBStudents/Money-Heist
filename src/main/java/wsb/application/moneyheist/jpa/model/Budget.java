@@ -22,5 +22,6 @@ public class Budget {
     private String label;
     private BigDecimal amount;
     private String description;
+    private Long userId;
 
 }
