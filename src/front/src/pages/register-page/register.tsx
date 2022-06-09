@@ -9,7 +9,7 @@ import { API_URL } from "../../utils/types/api-types";
 import { LoginTypes } from "../login-page/login-types";
 
 const Register: React.FC = () => {
-  const { login, handleUserPage } = useContext(AuthContext);
+  const { handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
     console.log(values);
     // login();

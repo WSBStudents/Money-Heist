@@ -13,6 +13,7 @@ const useBreakpoint = () => {
     return () => {
       window.addEventListener("resize", resize);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const sm = breakpoint < 600;
