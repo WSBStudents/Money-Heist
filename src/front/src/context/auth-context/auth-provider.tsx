@@ -9,8 +9,10 @@ import AuthContext from "./auth-context";
 const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [loginPage, setLoginPage] = useState(true);
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
   const { clearBudgets } = React.useContext(BudgetContext);
+
   const login = (username: string, password: string) => {
     axios
       .post(`${API_URL}/auth/signin`, {
@@ -22,6 +24,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
           "userToken",
           `Bearer ${response.data.accessToken}`
         );
+        setUserName(response.data.username);
         setIsAuth(true);
         navigate("/");
       })
@@ -50,6 +53,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
         logout,
         handleUserPage,
         loginPage,
+        userName,
       }}
     >
       {children}

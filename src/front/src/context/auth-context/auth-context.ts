@@ -6,6 +6,7 @@ export type AuthContextTypes = {
   logout: () => void;
   handleUserPage: () => void;
   loginPage: boolean;
+  userName: string;
 };
 
 const AuthContext = React.createContext<AuthContextTypes>({
@@ -14,6 +15,7 @@ const AuthContext = React.createContext<AuthContextTypes>({
   handleUserPage: () => ({}),
   login: (x: string, y: string) => ({}),
   logout: () => ({}),
+  userName: "username",
 });
 
 export default AuthContext;

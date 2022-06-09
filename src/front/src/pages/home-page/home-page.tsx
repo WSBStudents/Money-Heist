@@ -7,10 +7,12 @@ import { useContext, useEffect } from "react";
 import HistoryTransaction from "../../components/history-transaction/history-transaction";
 import TransactionContext from "../../context/transaction-context/transaction-context";
 import BudgetContext from "../../context/budget-context/budget-context";
+import AuthContext from "../../context/auth-context/auth-context";
 
 const HomePage: React.FC = () => {
   const { isLoading, transactions, getTransactions } =
     useContext(TransactionContext);
+  const { userName } = useContext(AuthContext);
   const { budgetAmount, getBudgetAmount } = useContext(BudgetContext);
   useEffect(() => {
     getTransactions(5);
@@ -20,7 +22,7 @@ const HomePage: React.FC = () => {
   return (
     <Content className="homePage__wrapper">
       <Spin spinning={isLoading}>
-        <Title level={2}>Witaj, username</Title>
+        <Title level={2}>Witaj{`,${userName}`}</Title>
         <Title level={4}>
           Tutaj znajdują się informacje, które zebraliśmy o Twoich płatnościach
         </Title>
