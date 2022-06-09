@@ -15,11 +15,9 @@ const Register: React.FC = () => {
     // login();
     axios
       .post(`${API_URL}/auth/signup`, {
-        params: {
-          username: values.login,
-          password: values.password,
-          role: ["user"],
-        },
+        username: values.login,
+        password: values.password,
+        role: ["user"],
       })
       .then((response) => {
         console.log("JEA kurwa ", response);

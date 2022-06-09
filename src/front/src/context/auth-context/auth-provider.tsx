@@ -13,10 +13,8 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
   const login = (username: string, password: string) => {
     axios
       .post(`${API_URL}/auth/signin`, {
-        params: {
-          username,
-          password,
-        },
+        username,
+        password,
       })
       .then((response) => {
         // setBudgets(response.data);
