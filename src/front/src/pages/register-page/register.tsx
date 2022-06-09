@@ -11,8 +11,6 @@ import { LoginTypes } from "../login-page/login-types";
 const Register: React.FC = () => {
   const { handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
-    console.log(values);
-    // login();
     axios
       .post(`${API_URL}/auth/signup`, {
         username: values.login,
@@ -20,9 +18,7 @@ const Register: React.FC = () => {
         role: ["user"],
       })
       .then((response) => {
-        console.log("JEA kurwa ", response);
         message.success("Zarejestrowało pomyślnie!");
-        // setBudgets(response.data);
       })
       .catch((error) => {
         message.error("Błąd podczas rejestracji, spróbuj ponownie!");

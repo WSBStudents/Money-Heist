@@ -1,7 +1,7 @@
 import { Content } from "antd/lib/layout/layout";
 import "./home-page.scss";
 import Title from "antd/lib/typography/Title";
-import { Spin } from "antd";
+import { Empty, Spin } from "antd";
 import AmountCard from "../../components/amount-card/amount-card";
 import { useContext, useEffect } from "react";
 import HistoryTransaction from "../../components/history-transaction/history-transaction";
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
           Tutaj znajdują się informacje, które zebraliśmy o Twoich płatnościach
         </Title>
 
-        <AmountCard budgetAmount={budgetAmount} />
+        {isLoading ? <Empty /> : <AmountCard budgetAmount={budgetAmount} />}
 
         <Title level={2} className="homePage__margin-top">
           Historia Transakcji
