@@ -3,13 +3,14 @@ import axios from "axios";
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../utils/types/api-types";
+import BudgetContext from "../budget-context/budget-context";
 import AuthContext from "./auth-context";
 
 const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [loginPage, setLoginPage] = useState(true);
   const navigate = useNavigate();
-
+  const { clearBudgets } = React.useContext(BudgetContext);
   const login = (username: string, password: string) => {
     axios
       .post(`${API_URL}/auth/signin`, {
@@ -35,6 +36,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("userToken");
     setIsAuth(false);
+    clearBudgets();
     navigate("/login");
   };
 

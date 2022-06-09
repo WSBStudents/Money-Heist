@@ -10,6 +10,7 @@ const TransactionContext = createContext({
   getTransactions: (_numberTransactionsToFetch?: number) => {},
   getTransactionsForBudget: (_budgetId?: number) => {},
   form: {} as FormInstance<any>,
+  clearTransaction: () => {},
 });
 
 export default TransactionContext;

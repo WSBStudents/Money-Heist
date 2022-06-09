@@ -90,6 +90,10 @@ const TransactionProvider: React.FC = ({ children }) => {
         setIsLoading(false);
       });
   };
+
+  const clearTransaction = () => {
+    setTransactions([]);
+  };
   return (
     <TransactionContext.Provider
       value={{
@@ -100,6 +104,7 @@ const TransactionProvider: React.FC = ({ children }) => {
         isLoading,
         saveTransaction,
         form,
+        clearTransaction,
       }}
     >
       {children}

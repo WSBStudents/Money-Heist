@@ -14,6 +14,7 @@ const BudgetContext = createContext({
   budget: {} as BudgetData,
   getBudgetAmount: () => {},
   budgetAmount: 0,
+  clearBudgets: () => {},
 });
 
 export default BudgetContext;

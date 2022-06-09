@@ -108,6 +108,11 @@ const BudgetProvider: React.FC = ({ children }) => {
       });
   };
 
+  const clearBudgets = () => {
+    setBudgets([]);
+    setBudget({} as BudgetData);
+    setBudgetAmount(0);
+  };
   return (
     <BudgetContext.Provider
       value={{
@@ -120,6 +125,7 @@ const BudgetProvider: React.FC = ({ children }) => {
         budget,
         getBudgetAmount,
         budgetAmount,
+        clearBudgets,
       }}
     >
       {children}
