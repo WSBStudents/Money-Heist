@@ -2,7 +2,7 @@ import React from "react";
 
 export type AuthContextTypes = {
   isAuth: boolean;
-  login: () => void;
+  login: (x: string, y: string) => void;
   logout: () => void;
   handleUserPage: () => void;
   loginPage: boolean;
@@ -12,7 +12,7 @@ const AuthContext = React.createContext<AuthContextTypes>({
   isAuth: true,
   loginPage: true,
   handleUserPage: () => ({}),
-  login: () => ({}),
+  login: (x: string, y: string) => ({}),
   logout: () => ({}),
 });
 

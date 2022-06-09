@@ -9,7 +9,7 @@ import { LoginTypes } from "./login-types";
 const Login: React.FC = () => {
   const { login, handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
-    login();
+    login(values.login, values.password);
   };
 
   const { md } = useBreakpoint();

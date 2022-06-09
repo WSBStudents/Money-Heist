@@ -1,18 +1,39 @@
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, message } from "antd";
 import Title from "antd/lib/typography/Title";
+import axios from "axios";
 
 import { useContext } from "react";
 import AuthContext from "../../context/auth-context/auth-context";
 import useBreakpoint from "../../hooks/use-breakpoint/use-breakpoint";
+import { API_URL } from "../../utils/types/api-types";
 import { LoginTypes } from "../login-page/login-types";
 
 const Register: React.FC = () => {
   const { login, handleUserPage } = useContext(AuthContext);
   const onFinish = (values: LoginTypes): void => {
-    login();
+    console.log(values);
+    // login();
+    axios
+      .post(`${API_URL}/auth/signup`, {
+        params: {
+          username: values.login,
+          password: values.password,
+          role: ["user"],
+        },
+      })
+      .then((response) => {
+        console.log("JEA kurwa ", response);
+        message.success("Zarejestrowało pomyślnie!");
+        // setBudgets(response.data);
+      })
+      .catch((error) => {
+        message.error("Błąd podczas rejestracji, spróbuj ponownie!");
+        throw new Error("Wystąpił błąd podczas rejestracji", error);
+      });
   };
 
   const { md } = useBreakpoint();
+
   return (
     <>
       <div className="login__column__headerContainer">
@@ -42,7 +63,7 @@ const Register: React.FC = () => {
         </Form.Item>
         <Form.Item
           label="Powtórz Hasło"
-          name="password"
+          name="password_second"
           rules={[{ required: true, message: "Potwórz hasło!" }]}
         >
           <Input.Password />
