@@ -19,7 +19,10 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
       .then((response) => {
         // setBudgets(response.data);
         console.log(response);
-        localStorage.setItem("userToken", "");
+        localStorage.setItem(
+          "userToken",
+          `Bearer ${response.data.accessToken}`
+        );
         setIsAuth(true);
         navigate("/");
       })

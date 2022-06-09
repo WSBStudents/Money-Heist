@@ -10,7 +10,7 @@ const App: React.FC = () => {
 
   axios.interceptors.request.use((request) => {
     if (request.headers) {
-      // request.headers.Authorization = "hello";
+      request.headers["Authorization"] = `${localStorage.getItem("userToken")}`;
       request.headers["Access-Control-Allow-Origin"] = HEADER;
     }
     return request;
