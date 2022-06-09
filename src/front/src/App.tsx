@@ -3,12 +3,16 @@ import { Outlet } from "react-router-dom";
 import Navigation from "./pages/sidebar/sidebar";
 import "./App.scss";
 import axios from "axios";
+import { HEADER } from "./utils/types/api-types";
 
 const App: React.FC = () => {
   document.title = "Zaliczenie na 5";
 
   axios.interceptors.request.use((request) => {
-    if (request.headers) request.headers.Authorization = "hello";
+    if (request.headers) {
+      // request.headers.Authorization = "hello";
+      request.headers["Access-Control-Allow-Origin"] = HEADER;
+    }
     return request;
   });
 
