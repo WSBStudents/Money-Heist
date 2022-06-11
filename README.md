@@ -19,16 +19,6 @@ Pozwala na użycie go w dowolnym miejscu aplikacji chroniąc go przed działanie
 
 **Użycie w projekcie**
 
-## Wzorzec Adapter
-
-**Opis wzorca**
-
-Wzorzec Adapter klasyfikuje się do wzorców strukturalnych, pozwala on na współdziałanie ze sobą obiektów o niekompatyblinych interfajsach.
-
-![adapter](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/adapter_structure.png?raw=true)
-
-**Użycie w projekcie**
-
 ## Wzorzec Fasada
 
 **Opis wzorca**
