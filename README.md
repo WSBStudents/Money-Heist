@@ -10,6 +10,6 @@
 
 ## Wzorzec Singleton
 
-![alt text](https://github.com/WSBStudents/Money-Heist/blob/main/singleton.png?raw=true)
+![singleton](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/singleton.png?raw=true)
 
 ## Wzorzec Adapter
