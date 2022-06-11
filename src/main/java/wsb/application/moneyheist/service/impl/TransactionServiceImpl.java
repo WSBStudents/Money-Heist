@@ -12,6 +12,7 @@ import wsb.application.moneyheist.jpa.model.Agreement;
 import wsb.application.moneyheist.jpa.model.Budget;
 import wsb.application.moneyheist.service.ManagerService;
 import wsb.application.moneyheist.service.TransactionService;
+import wsb.application.moneyheist.utils.CalculatorFacade;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,9 +21,6 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 public class TransactionServiceImpl implements TransactionService {
-
-    private static final String INCOME_TYPE = "INCOME";
-    private static final String EXPENSE_TYPE = "EXPENSE";
 
     private ManagerService managerService;
     private MapperFacade mapper;
@@ -38,7 +36,7 @@ public class TransactionServiceImpl implements TransactionService {
         final BudgetDto budgetDto = mapper.map(managerService.getBudgetById(transactionDto.getBudgetId()), BudgetDto.class);
 
         final BigDecimal amount = transactionDto.getAmount();
-        budgetDto.setAmount(calculateBudget(budgetDto.getAmount(), amount, transactionDto.getType(), false));
+        budgetDto.setAmount(CalculatorFacade.calculateAmount(budgetDto.getAmount(), amount, transactionDto.getType(), false));
 
         final Budget budget = mapper.map(budgetDto, Budget.class);
         managerService.addBudget(budget);
@@ -57,7 +55,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     private void refreshBudgetAmount(final Agreement agreement) {
         final Budget budget = agreement.getBudget();
-        budget.setAmount(calculateBudget(budget.getAmount(), agreement.getAmount(), agreement.getType(), true));
+        budget.setAmount(CalculatorFacade.calculateAmount(budget.getAmount(), agreement.getAmount(), agreement.getType(), true));
         managerService.addBudget(budget);
     }
 
@@ -71,27 +69,6 @@ public class TransactionServiceImpl implements TransactionService {
         }
 
         return mapper.mapAsList(agreements, TransactionDto.class);
-    }
-
-    private BigDecimal calculateBudget(final BigDecimal budgetAmount,
-                                       final BigDecimal transactionAmount,
-                                       final String type,
-                                       final boolean reverse) {
-        switch (type) {
-            case EXPENSE_TYPE:
-                if (reverse) {
-                    return budgetAmount.add(transactionAmount);
-                } else {
-                    return budgetAmount.subtract(transactionAmount);
-                }
-            case INCOME_TYPE:
-                if (reverse) {
-                    return budgetAmount.subtract(transactionAmount);
-                } else {
-                    return budgetAmount.add(transactionAmount);
-                }
-        }
-        return budgetAmount;
     }
 
 }
