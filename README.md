@@ -48,3 +48,13 @@ Wzorzec Builder klasyfikuje się do wzorców kreacyjnych. Pozwala tworzyć zło�
 ![builder](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/builder_structure.png?raw=true)
 
 **Użycie w projekcie**
+
+## Wzorzec MVC
+
+**Opis wzora**
+
+Wzorzec MVC jest jednym z najstarszych wzroców architekrualnych w tworzeniu aplikacji internetwoych. W rozszerzeniu oznacza Model-View-Controller. Jest używany w celu odzielenia logiki od innych warst programu.
+
+![mvc](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/mvc_structure.png?raw=true)
+
+**Użycie w projekcie**
