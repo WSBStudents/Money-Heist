@@ -25,18 +25,26 @@ Pozwala na użycie go w dowolnym miejscu aplikacji chroniąc go przed działanie
 
 Wzorzec Adapter klasyfikuje się do wzorców strukturalnych, pozwala on na współdziałanie ze sobą obiektów o niekompatyblinych interfajsach.
 
-![singleton](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/adapter_structure.png?raw=true)
+![adapter](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/adapter_structure.png?raw=true)
 
 **Użycie w projekcie**
 
-## Wzorzec x
+## Wzorzec Fasada
 
 **Opis wzorca**
+
+Wzorzec Fasada klasyfikuje się do wzorców strukturalnych. Charakteryzuje się tym, że biblioteka lub framework zostaje wyposażony w uproszczony interfejs. Stworzenie fasady jest wygodnym sposobem integracji aplikacji z biblioteką posiadającą wiele funkcji, gdy potrzebujesz tylko niektórych z nich.
+
+![facade](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/facade_structure.png?raw=true)
 
 **Użycie w projekcie**
 
-## Wzorzec x
+## Wzorzec Builder
 
 **Opis wzorca**
+
+Wzorzec Builder klasyfikuje się do wzorców kreacyjnych. Pozwala tworzyć złożone obiekty sukcesywnie krok po kroku. Z użyciem tego wzorca można utworzyć różne typy i reprezentacje obiektu używając tego samego kodu konstrukcyjnego
+
+![builder](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/builder_structure.png?raw=true)
 
 **Użycie w projekcie**
