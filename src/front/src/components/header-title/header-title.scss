@@ -1,0 +1,21 @@
+@import '../../utils/styles/global-styles.scss';
+
+.headerTitle{
+    &__wrapper{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        background: $white;
+    }
+
+    &__title{
+        font-size: 28px;
+        padding: 20px 30px;
+    }
+    &__arrow{
+        padding-right: 30px;
+        font-size: 28px;
+    }
+}

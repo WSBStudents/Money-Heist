@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "wsb.application.moneyheist.jpa.repository")
+@EnableJpaRepositories(basePackages = {"wsb.application.moneyheist.jpa.repository", "wsb.application.moneyheist.auth"})
 public class MoneyHeistApplication {
 
 	public static void main(String[] args) {

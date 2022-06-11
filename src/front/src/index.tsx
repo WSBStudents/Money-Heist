@@ -1,11 +1,20 @@
 import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
+import "./index.scss";
 import { BrowserRouter } from "react-router-dom";
+import AuthProvider from "./context/auth-context/auth-provider";
+import AppRoutes from "./routes/app-routes";
+import TransactionProvider from "./context/transaction-context/transaction-provider";
+import BudgetProvider from "./context/budget-context/budget-provider";
 
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <AuthProvider>
+      <BudgetProvider>
+        <TransactionProvider>
+          <AppRoutes />
+        </TransactionProvider>
+      </BudgetProvider>
+    </AuthProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import wsb.application.moneyheist.dto.BudgetDto;
 import wsb.application.moneyheist.dto.TransactionDto;
 import wsb.application.moneyheist.jpa.model.Budget;
-import wsb.application.moneyheist.jpa.model.Transaction;
+import wsb.application.moneyheist.jpa.model.Agreement;
 
 @Configuration
 public class OrikaConfig {
@@ -17,8 +17,8 @@ public class OrikaConfig {
 
     @Bean
     public MapperFacade mapperFacade() {
-        mapperFactory.classMap(TransactionDto.class, Transaction.class)
-                .field("budgetDto", "budget")
+        mapperFactory.classMap(TransactionDto.class, Agreement.class)
+                .field("budgetId", "budget.id")
                 .byDefault()
                 .register();
 
