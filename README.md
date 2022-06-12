@@ -1,3 +1,5 @@
+Aplikacja MoneyHeist została stworzona do kontrolowania budżetów. W aplikacji możemy dodać budżet, a do każdego budżetu może zostać przypisana transakcja, która jest zyskiem lub wydatkiem dla danego budżetu. Automatycznie jest zliczana suma wszystkich transakcji dla budżetu, oraz globalna suma środków dla użytkownika. Każdy użytkownik może się zarejestrować i zalogować do platformy gdzie będzie posiadał swoje budżety. Aplikacja została stworzona w technologi React-Spring
+
 ## Wzorce projektowe
 
 - Informatyka, Programowanie
@@ -12,7 +14,6 @@
 https://gentle-stone-04b6c3503.1.azurestaticapps.net/
 
 # Wzorce projektowe
-
 
 ## Wzorzec Singleton
 
@@ -31,7 +32,6 @@ Z pomocą Spring każda klasa, która jest oznaczona adnotacją np. @Component, 
 
 Czyli klasy np. klasy: UserDetailsServiceImpl, BudgetServiceImpl, ManagerServiceImpl, TransactionServiceImpl,
 AuthEntryPointJwt, JwtUtils.
-
 
 ## Wzorzec Fasada
 
