@@ -33,6 +33,8 @@ Z pomocą Spring każda klasa, która jest oznaczona adnotacją np. @Component, 
 Czyli klasy np. klasy: UserDetailsServiceImpl, BudgetServiceImpl, ManagerServiceImpl, TransactionServiceImpl,
 AuthEntryPointJwt, JwtUtils.
 
+![singleton_own](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/singleton.png?raw=true)
+
 ## Wzorzec Fasada
 
 **Opis wzorca**
