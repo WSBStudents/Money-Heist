@@ -48,6 +48,8 @@ Klasa CalculatorFacade jest to klasa, która na podstawie danych wejściowych(w 
 Logika biznesowa calculate różni się w zależności od operacji (zysk / wydatek), dlatego została zastosowana fasada,
 która odpowiednio wywoła ExpenseProcess lub IncomeProcess.
 
+![facade_own](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/facade.png?raw=true)
+
 ## Wzorzec Builder
 
 **Opis wzorca**
@@ -95,3 +97,5 @@ Jest to wzorzec projektowy i wzorzec architektury oprogramowania polegający na 
 
 Polega na przekazywaniu gotowych, utworzonych instancji obiektów udostępniających swoje metody i właściwości obiektom, które z nich korzystają (np. jako parametry konstruktora, settery). Stanowi alternatywę do podejścia, gdzie obiekty tworzą instancję obiektów, z których korzystają np. we własnym konstruktorze.
 Za to odpowiada gwne załóżenie Spring Frameworku.
+
+![mvc_own](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/mvc.png?raw=true)
