@@ -13,6 +13,34 @@ Aplikacja MoneyHeist została stworzona do kontrolowania budżetów. W aplikacji
 #Aplikacja jest dostępna pod adresem:
 https://gentle-stone-04b6c3503.1.azurestaticapps.net/
 
+## Wzorzec MVC
+
+**Opis wzora**
+
+Wzorzec MVC jest jednym z najstarszych wzroców architekrualnych w tworzeniu aplikacji internetwoych. W rozszerzeniu oznacza Model-View-Controller. Jest używany w celu odzielenia logiki od innych warst programu.
+
+![mvc](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/mvc_structure.png?raw=true)
+
+**Użycie w projekcie**
+Większość aplikacji webowych używa wzorca MVC.
+
+W naszym przypadku jako controller jest traktowana każda klasa z adnotacją
+@Controller czyli: BudgetCtrl, TransactionCtrl, AuthController, TestCtrl.
+
+Modelem są klasy odwzorujące tabele w bazie danych czyli: User, Role, Agreement, Budget.
+Także przejściowo są klasy: BudgetDto, TransactionDto, UserDto
+
+Jako View w naszym przypadku jest odpowiedzialna warstwa frontendowa po stronie frontu, która odpowiednio np. wyświetla przekazane przez controller dane.
+
+##Wstrzykiwanie zależności (ang. Dependency Injection)
+Warto wspomnieć, że większość klas używa wzorca wstrzykiwania zależności.
+Jest to wzorzec projektowy i wzorzec architektury oprogramowania polegający na usuwaniu bezpośrednich zależności pomiędzy komponentami na rzecz architektury typu plug-in.
+
+Polega na przekazywaniu gotowych, utworzonych instancji obiektów udostępniających swoje metody i właściwości obiektom, które z nich korzystają (np. jako parametry konstruktora, settery). Stanowi alternatywę do podejścia, gdzie obiekty tworzą instancję obiektów, z których korzystają np. we własnym konstruktorze.
+Za to odpowiada gwne załóżenie Spring Frameworku.
+
+![mvc_own](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/mvc.png?raw=true)
+
 # Wzorce projektowe
 
 ## Wzorzec Singleton
@@ -74,30 +102,3 @@ Później wystarczy wywołać mapper.map([obiekt wejściowy], [Klasa oczekiwana]
 Biblioteka zapewni nam odpowiedni obiekt na wyjściu. Podsumując przeplata się tu dwa wzorca factory oraz strategy.
 Klasa konfiguracyjna orika - OrikaConfig.
 
-## Wzorzec MVC
-
-**Opis wzora**
-
-Wzorzec MVC jest jednym z najstarszych wzroców architekrualnych w tworzeniu aplikacji internetwoych. W rozszerzeniu oznacza Model-View-Controller. Jest używany w celu odzielenia logiki od innych warst programu.
-
-![mvc](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/mvc_structure.png?raw=true)
-
-**Użycie w projekcie**
-Większość aplikacji webowych używa wzorca MVC.
-
-W naszym przypadku jako controller jest traktowana każda klasa z adnotacją
-@Controller czyli: BudgetCtrl, TransactionCtrl, AuthController, TestCtrl.
-
-Modelem są klasy odwzorujące tabele w bazie danych czyli: User, Role, Agreement, Budget.
-Także przejściowo są klasy: BudgetDto, TransactionDto, UserDto
-
-Jako View w naszym przypadku jest odpowiedzialna warstwa frontendowa po stronie frontu, która odpowiednio np. wyświetla przekazane przez controller dane.
-
-##Wstrzykiwanie zależności (ang. Dependency Injection)
-Warto wspomnieć, że większość klas używa wzorca wstrzykiwania zależności.
-Jest to wzorzec projektowy i wzorzec architektury oprogramowania polegający na usuwaniu bezpośrednich zależności pomiędzy komponentami na rzecz architektury typu plug-in.
-
-Polega na przekazywaniu gotowych, utworzonych instancji obiektów udostępniających swoje metody i właściwości obiektom, które z nich korzystają (np. jako parametry konstruktora, settery). Stanowi alternatywę do podejścia, gdzie obiekty tworzą instancję obiektów, z których korzystają np. we własnym konstruktorze.
-Za to odpowiada gwne załóżenie Spring Frameworku.
-
-![mvc_own](https://github.com/WSBStudents/Money-Heist/blob/main/design_patterns/mvc.png?raw=true)
